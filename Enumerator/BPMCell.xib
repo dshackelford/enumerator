@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="152" id="oME-J7-cXf" customClass="BPMCell">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="152"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oME-J7-cXf" id="cn1-Zc-HzV">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="151"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="5gb-mS-Da6">
+                        <rect key="frame" x="259" y="91" width="118" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="114" id="4Et-ng-v4d"/>
+                            <constraint firstAttribute="height" constant="30" id="lFX-nI-Vq7"/>
+                        </constraints>
+                        <connections>
+                            <action selector="editingDidEnd:" destination="oME-J7-cXf" eventType="editingDidEndOnExit" id="Gc9-mi-gVX"/>
+                            <action selector="sliderChangedValue:" destination="oME-J7-cXf" eventType="valueChanged" id="ye8-uR-zcv"/>
+                        </connections>
+                    </slider>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCs-ol-CXo">
+                        <rect key="frame" x="285" y="37" width="67" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="5gb-mS-Da6" secondAttribute="trailing" constant="10" id="1yJ-Rj-XEt"/>
+                    <constraint firstItem="5gb-mS-Da6" firstAttribute="top" secondItem="YCs-ol-CXo" secondAttribute="bottom" constant="10" id="TAF-XJ-2CR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="5gb-mS-Da6" secondAttribute="bottom" constant="10" id="byd-eM-tcS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="YCs-ol-CXo" secondAttribute="trailing" constant="50" id="uGH-wh-adP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bpmCount" destination="YCs-ol-CXo" id="Q95-fz-hOq"/>
+                <outlet property="slider" destination="5gb-mS-Da6" id="9PL-m3-C42"/>
+            </connections>
+            <point key="canvasLocation" x="-210" y="61"/>
+        </tableViewCell>
+    </objects>
+</document>
