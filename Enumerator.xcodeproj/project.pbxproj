@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6902AB0E1E0B48D20048DEC6 /* HighScoreDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */; };
 		690AD8001E087B19000221AE /* GameViewPopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 690AD7FF1E087B19000221AE /* GameViewPopulator.m */; };
 		690C6DBB1E04FDF400F93A8C /* SubFactorsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690C6DBA1E04FDF400F93A8C /* SubFactorsView.xib */; };
 		690C6DBD1E04FE0500F93A8C /* SubFactorsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 690C6DBC1E04FE0500F93A8C /* SubFactorsView.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreDataHandler.m; sourceTree = "<group>"; };
+		6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighScoreDataHandler.h; sourceTree = "<group>"; };
 		690AD7FE1E087B0F000221AE /* GameViewPopulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewPopulator.h; sourceTree = "<group>"; };
 		690AD7FF1E087B19000221AE /* GameViewPopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewPopulator.m; sourceTree = "<group>"; };
 		690C6DBA1E04FDF400F93A8C /* SubFactorsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubFactorsView.xib; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				69AC6F841DFB69710066F6A2 /* HomeVC.m */,
 				698666541E00CAA900141882 /* HighScoresVC.h */,
 				698666521E00CA9B00141882 /* HighScoresVC.m */,
+				6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */,
+				6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */,
 				69AC6F961DFC7F610066F6A2 /* Settings */,
 				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
 				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
@@ -351,6 +356,7 @@
 				69AC6F851DFB69710066F6A2 /* HomeVC.m in Sources */,
 				698666531E00CA9B00141882 /* HighScoresVC.m in Sources */,
 				69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */,
+				6902AB0E1E0B48D20048DEC6 /* HighScoreDataHandler.m in Sources */,
 				69AC6F511DFB5F800066F6A2 /* main.m in Sources */,
 				69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */,
 			);

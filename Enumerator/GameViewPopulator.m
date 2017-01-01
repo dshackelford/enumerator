@@ -28,32 +28,32 @@
     heightInfo = 0.1*screenSize.height;
     backButton.frame = CGRectMake(10, yInfo,75,heightInfo);
     
-    //Count View
-    xCount = 0;
-    yCount = yInfo + heightInfo; //to clear the wifi signal and time bar on iphone
-    widthCount = screenSize.width;
-    heightCount = 0.2*screenSize.height; //or 120
-    
     //Life Bar
     widthLifeBar = screenSize.width;
     heightLifeBar = 25;
     xLifeBar = 0;
-    yLifeBar = screenSize.height - heightLifeBar;
+    yLifeBar = yInfo + heightInfo + 10; //the ten is for a buffer
+    
+    //Count View
+    xCount = 0;
+    yCount = yLifeBar + heightLifeBar; //to clear the wifi signal and time bar on iphone
+    widthCount = screenSize.width;
+    heightCount = 0.2*screenSize.height; //or 120
+    
+    //Metronome Images (center of images!!)
+    xMetro = screenSize.width/2;
+    yMetro = yCount + heightCount + 15;
+    heightMetro = 5;
     
     //Factor Buttons (with all around buffer of 10 pixels)
     xFactor1 = 10;
     xFactor2 = screenSize.width/2 + 5; //this may change depending on number of factors
-    yFactor1 = yCount + heightCount + 10;
+    yFactor1 = yMetro + heightMetro;
     yFactor2 = yFactor1;
     widthFactor1 = screenSize.width/2 - 10 - 5; //there is a ten gap on phone edges, and down the center
     widthFactor2 = widthFactor1;
-    heightFactor1 = screenSize.height - yCount - heightCount - heightLifeBar - 2*10;
+    heightFactor1 = screenSize.height - yMetro + heightMetro - 2*10; //the two tens for edges
     heightFactor2 = heightFactor1;
-    
-    //Metronome Images (center of images!!)
-    xMetro = screenSize.width/2;
-    yMetro = yCount + heightCount + 8;
-    
     
     //ScoreBox
     widthScoreBox = 0.65*screenSize.width;
@@ -72,8 +72,7 @@
     infoView.layer.borderColor = [UIColor blackColor].CGColor;
     infoView.layer.borderWidth = 3;
     
-    UITextView* infoTextView = [[UITextView alloc] initWithFrame:CGRectMake(0,0,200,200)];
-    infoTextView.center = CGPointMake(widthInfo - 100,5 + 100); //this center point is relative to the infoTextView!!!
+    UITextView* infoTextView = [[UITextView alloc] initWithFrame:CGRectMake(widthInfo - 200,-3,200,heightInfo)];//200 are the width and height of the text box
     infoTextView.text = [NSString stringWithFormat:@"Beats/min: %@ \nHigh Score: %@",[prefDict objectForKey:kBeatsPerMinute],[prefDict objectForKey:kHighScore]];
     infoTextView.backgroundColor = [UIColor clearColor];
     infoTextView.textAlignment = NSTextAlignmentRight;
@@ -133,14 +132,13 @@
 -(NSMutableArray*)makeLifeBarArray:(int)numLives
 {
     NSMutableArray* lifeBarArr = [[NSMutableArray alloc] init];
-    double barLength = screenSize.width/numLives;
+    double barLength = (screenSize.width - 20)/numLives; //the 20 is for a 10 buffer on both sides
     
     for (int i = 0; i < numLives; i = i + 1)
     {
         CGRect aBarRect = CGRectMake(3, 3, barLength, heightLifeBar);
         UIImageView* barImageView = [self drawTile:aBarRect andBarLength:barLength];
-        
-        barImageView.center = CGPointMake(i*barLength + barLength/2 + 3*5/2,screenSize.height - heightLifeBar/2 + 3);
+        [barImageView setFrame:CGRectMake(i*barLength + 10, yLifeBar, barLength + 6 , heightLifeBar)]; //the constant 10 offset is for the boundrary
         [parentViewController.view addSubview:barImageView];
         [lifeBarArr addObject:barImageView];
     }
@@ -159,7 +157,7 @@
     //METRONOME EXPANDS
     for (int i = 0; i < numOfImages ; i=i+1)
     {
-        CGRect rect = CGRectMake(0, 0, i/numOfImages*metronomeLength, 5);
+        CGRect rect = CGRectMake(0, 0, i/numOfImages*metronomeLength, heightMetro);
         UIImageView* im = [self drawTile:rect ofColor:[UIColor redColor] withBorder:NO];
         im.center = CGPointMake(xMetro,yMetro);
         [arr addObject:im];
@@ -168,7 +166,7 @@
     //METRONOME CONTRACTS
     for (int i = numOfImages; i > 0 ; i=i-1)
     {
-        CGRect rect = CGRectMake(0, 0, i/numOfImages*metronomeLength, 5);
+        CGRect rect = CGRectMake(0, 0, i/numOfImages*metronomeLength, heightMetro);
         UIImageView* im = [self drawTile:rect ofColor:[UIColor redColor] withBorder:NO];
         im.center = CGPointMake(xMetro,yMetro);
         [arr addObject:im];

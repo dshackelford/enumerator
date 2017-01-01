@@ -48,6 +48,7 @@
     //Metronome Images (center of images)
     double xMetro;
     double yMetro;
+    double heightMetro;
     
     //ScoreBox
     double xScoreBox;

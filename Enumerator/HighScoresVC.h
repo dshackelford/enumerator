@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HighScoresVC : UITableViewController
+#import "AppUtilities.h"
+@interface HighScoresVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet UITextView* textView;
     IBOutlet UIBarButtonItem* backButton;
     
-    //should there be a table??
+    NSArray* tableData;
+    CGSize screenSize;
+    
+    UIView* loadingView;
+    UIActivityIndicatorView* actInd;
+    
 }
 
 -(void)grabHighScores;
