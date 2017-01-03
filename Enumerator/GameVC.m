@@ -30,11 +30,24 @@
     //GAME CONSTANTS
     beatCount = 0;
     fastFrameRate = 0.005;
-    currentHighScore = [[prefDict objectForKey:kHighScore] intValue]; //should have more input like the factors crrently at play.
     numOfLives = [[prefDict objectForKey:kNumOfLives] intValue];
     countIter = [[prefDict objectForKey:kCountIteration] intValue];
     factor1 = [[prefDict objectForKey:kFactor1] intValue]; //base mutliples
     factor2 = [[prefDict objectForKey:kFactor2] intValue];
+    
+    if (factor1 < factor2) //used to standarize having the smaller factor come first for dictionary call
+    {
+        factorKey = [NSNumber numberWithInt:(factor1*10 + factor2)];
+    }
+    else
+    {
+        factorKey = [NSNumber numberWithInt:(factor2*10 + factor1)];
+    }
+    
+    factorStr = [NSString stringWithFormat:@"%@",factorKey];
+    
+    currentHighScore = [[[prefDict objectForKey:kHighScoreDict] objectForKey:factorStr] intValue]; //should have more input like the factors crrently at play.
+
     double frequency = [[prefDict objectForKey:kBeatsPerMinute] doubleValue];
     period = 60/frequency;
 
@@ -45,7 +58,7 @@
 
 -(void)addGameInterface
 {
-    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self withPrefDict:prefDict behindBackButton:backButton];
+    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self withPrefDict:prefDict behindBackButton:backButton withHighScoreKey:factorStr];
     
     //INFO BAR
     infoView = [gamePopulator makeInfoBarView];
@@ -243,10 +256,18 @@
 
 -(void)saveScore
 {
-    if(count > [[prefDict objectForKey:kHighScore] intValue])
+    NSDictionary* highScoreDict = [prefDict objectForKey:kHighScoreDict];
+    
+    if(count > currentHighScore)
     {
-        [prefDict setValue:[NSNumber numberWithInteger:count] forKey:kHighScore];
+        NSLog(@"New High Score for these Factors!");
+        [highScoreDict setValue:[NSNumber numberWithInt:count] forKey:factorStr]; //update the current highscore for the current factor settings in which the game was just played in.
+        [prefDict setValue:highScoreDict forKey:kHighScoreDict]; //add the high score dict back into larger dictionary
         [prefDict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
+        
+        //tell website to update itself?
+        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+        [hsDataHandler postAHighScore:count];
     }
 }
 

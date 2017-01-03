@@ -10,16 +10,6 @@
 #import "SettingsVC.h"
 
 @implementation SettingsVC
-//
-//typedef enum {
-//    username,
-//    bpm,
-//    factor1,
-//    factor2,
-//    numOfFacs,
-//    highScore
-//    
-//} keyIndex;
 
 -(void)viewDidLoad
 {

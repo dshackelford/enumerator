@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppUtilities.h"
 #import "GameViewPopulator.h"
+#import "HighScoreDataHandler.h"
 
 @interface GameVC : UIViewController
 {
@@ -22,6 +23,8 @@
     int count;
     int factor1;
     int factor2;
+    NSNumber* factorKey;
+    NSString* factorStr;
     int iter1;
     int iter2;
     int numOfLives;

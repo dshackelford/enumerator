@@ -16,6 +16,7 @@
     CGSize screenSize;
     NSDictionary* prefDict;
     UIButton* backButton;
+    NSString* factorKey;
     
     //Info Bar view
     double xInfo;
@@ -57,7 +58,7 @@
     double heightScoreBox;
 }
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit;
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit withHighScoreKey:(NSString*)factorKeyInit;
 
 -(UIView*)makeInfoBarView;
 -(UILabel*)makeCountLabel;

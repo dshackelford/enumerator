@@ -34,11 +34,11 @@
     [appInfo createFileAtPath:[self getPathToUserInfoFile] contents:nil attributes:nil];
     
     //ADDING TO THE DICTIONARY SHOULD HAPPEN IN THE SETTINGS
+    NSArray* keys = @[kUserName,kBeatsPerMinute,kFactor1,kFactor2,kNumberOfFactors,kHighScoreDict,kCountIteration,kNumOfLives];
     
-    NSArray* keys=@[kUserName,kBeatsPerMinute,kFactor1,kFactor2,kNumberOfFactors,kHighScore,kCountIteration,kNumOfLives];
+    NSDictionary* highScoreDict = [[NSDictionary alloc] initWithObjects:@[@55] forKeys:@[@"23"]]; //dictionary where each object is the highscore for the corresponding key which is factors from low to high!
     
-    NSArray* objects = @[@"username",@60,@"2",@"3",@2,@32,@1,@5]; //the initial settings for a new user
-    
+    NSArray* objects = @[@"username",@60,@"2",@"3",@2,highScoreDict,@1,@5]; //the initial settings for a new user
     NSDictionary* myDictionary =[[NSDictionary alloc] initWithObjects:objects forKeys:keys];
     
     [myDictionary writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES ];

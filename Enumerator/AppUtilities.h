@@ -10,9 +10,13 @@
 #define kFactor1 @"factor1"
 #define kFactor2 @"factor2"
 #define kNumberOfFactors @"numOfFactors"
-#define kHighScore @"userHighScore"
+#define kHighScoreDict @"highScoreDict"
 #define kCountIteration @"countIteration"
 #define kNumOfLives @"numberOfLives"
+
+#define urlGetHighScores @"http://dshacktech.com/getScores.php"
+#define nDidGetData @"didGetData"
+#define kPostHighScoresBaseURL @"http://dshacktech.com/getScores.php"
 
 @interface AppUtilities : NSObject
 {

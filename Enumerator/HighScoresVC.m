@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "HighScoresVC.h"
 
+
 @implementation HighScoresVC
 
 -(void)viewDidLoad
 {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:nDidGetData object:nil];
+    
     [super viewDidLoad];
     screenSize = [UIScreen mainScreen].bounds.size;
     self.title = @"High Scores";
@@ -23,12 +27,48 @@
     self.tableView.delegate = self;
     tableData = nil; //to make the initial table delegate methods work
     
+    [self addLoadingScreen];
+    
+    [self grabHighScores];
+}
+
+
+-(void)grabHighScores
+{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
                    ^{
-                       [self grabHighScores];
+                       HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
+//                       [hsHandler getScoresForFactors:[NSString stringWithFormat:urlGetHighScores]]; //needs to change!!!
+                       [hsHandler getAllUserScores];
+                       
                    });
+}
+
+//ON MAIN THREAD
+-(void)didGetData:(NSNotification*)notification
+{
+    NSLog(@"Got data");
+    HighScoreDataHandler* hsHandler = notification.object;
+    NSLog(@"%@",hsHandler.dataArray);
+
+//    tableData = [hsHandler.dataDict objectForKey:@"scores"];
+    tableData = hsHandler.dataArray; //an array ofdictionarys for each user/factors/scors/count etc..
+    [self removeLoadingScreen];
     
-    [self addLoadingScreen];
+    sectionNames = [[NSMutableArray alloc] init];
+    [sectionNames addObject:[[tableData objectAtIndex:0] valueForKey:@"factors"]];
+    int count = 0;
+    
+    for(NSDictionary* userDict in tableData)
+    {
+        if(![[sectionNames objectAtIndex:count] isEqualToString:[userDict objectForKey:@"factors"]])
+        {
+            [sectionNames addObject:[userDict objectForKey:@"factors"]];
+            count = count + 1;
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 -(void)addLoadingScreen
@@ -46,7 +86,7 @@
     // you will probably need to adjust those frame values to get it centered
     [actInd startAnimating];
     [loadingView addSubview:actInd];
-//    [loadingView addSubview:lblLoading];
+    //    [loadingView addSubview:lblLoading];
     [self.view addSubview:loadingView];
 }
 
@@ -56,56 +96,34 @@
     [loadingView removeFromSuperview];
 }
 
--(void)grabHighScores
-{
-    NSString* stringURL = [NSString stringWithFormat:@"http://dshacktech.com/getScores.php"];
-    
-    NSURL* theURL = [NSURL URLWithString:stringURL];
-    
-    NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession]
-                                                   downloadTaskWithURL:theURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                                                       // 3
-                                                       NSData* receivedData = [[NSData alloc] initWithContentsOfURL:theURL];
-                                                       NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:nil];
-                                                       dispatch_async(dispatch_get_main_queue(),^{
-                                                           tableData = [jsonDict valueForKey:@"scores"];
-                                                           [self removeLoadingScreen];
-                                                           [self.tableView reloadData];
-                                                       });
-                                                       
-                                                   }];
-    
-    [downloadPhotoTask resume];
-
-}
-
 #pragma mark - Table View Delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1; //maybe each section is based off factors used
+    return [sectionNames count]; //maybe each section is based off factors used
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //need to figure out how many scores in this section, not some static number
     return [tableData count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50; // you can have your own choice, of course
+    return 40; // you can have your own choice, of course
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 50)];
     UILabel* userLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
-    userLabel.text = @"Username";
-    userLabel.font = [UIFont systemFontOfSize:22];
+    userLabel.text = [NSString stringWithFormat:[sectionNames objectAtIndex:section]];
+//    userLabel.font = [UIFont systemFontOfSize:15];
     [headerView addSubview: userLabel];
     
-    UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
-    scoreLabel.text = @"Score";
-    scoreLabel.font = [UIFont systemFontOfSize:22];
-    [headerView addSubview: scoreLabel];
-    
+//    UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
+//    scoreLabel.text = @"Score";
+//    scoreLabel.font = [UIFont systemFontOfSize:22];
+//    [headerView addSubview: scoreLabel];
+//    
     headerView.backgroundColor = [UIColor lightGrayColor];
     
     return headerView;
@@ -113,8 +131,10 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* usernameStr = [NSString stringWithFormat:@"%@",[[tableData objectAtIndex:indexPath.row] valueForKey:kUserName]];
-    NSString* scoreStr = [NSString stringWithFormat:@"%@",[[tableData objectAtIndex:indexPath.row] valueForKey:@"score"]];
+    NSDictionary* userDict = [tableData objectAtIndex:indexPath.row];
+    
+    NSString* usernameStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
+    NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"highScore"]];
     
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
     cell.textLabel.text = usernameStr;
@@ -126,6 +146,10 @@
     [cell setAccessoryView:accLabel];
     
     return cell;
-    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"didGetData" object:nil];
 }
 @end

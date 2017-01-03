@@ -11,35 +11,55 @@
 
 @implementation HighScoreDataHandler
 
-//+(NSArray*)getHighScoresForFactors:(int)factors
-//{
-//    NSString* factorStr = [NSString stringWithFormat:@"%d",factors];
+-(void)getScoresForFactors:(NSString*)factorStr
+{
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromFactors.php?factors=%@",factorStr]]];
+    [downloadTask resume];
+    
+}
+
+-(void)getAllUserScores
+{
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getAllScores.php"]]];
+    [downloadTask resume];
+}
+
+-(void)postAHighScore:(int)score
+{
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:@"http://dshacktech.com/enumerator/postScore.php?username=testUser&factors=12&highScore=27&countIteration=1"]];
+    [downloadTask resume];
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    NSData *data = [NSData dataWithContentsOfURL:location];
+    
+    _dataArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil]; //technically an array
+//    NSLog(@"%@",_dataArray);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetData object:self];
+    });
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
+{
+    
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+//    float progress = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
 //    
-//    NSString* stringURL = [NSString stringWithFormat:@"http://dshacktech.com/getScores.php"];
-//    
-//    NSURL* theURL = [NSURL URLWithString:stringURL];
-//    
-//    NSArray* dataArray = [[NSArray alloc] init];
-//    
-//    NSURLSession* session =[NSURLSession sharedSession];
-//    NSURLSessionDataTask* dataTask = [session dataTaskWithURL:m completionHandler:<#^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)completionHandler#>]
-//    
-//    NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession]
-//                                                   downloadTaskWithURL:theURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-//                                                       // 3
-//                                                       NSData* receivedData = [[NSData alloc] initWithContentsOfURL:theURL];
-//                                                       NSDictionary* jsonDict = [NSJSONSerialization JSONObjectWithData:receivedData options:0 error:nil];
-//                                                       dispatch_async(dispatch_get_main_queue(),^{
-//                                                           dataArray = [jsonDict valueForKey:@"scores"];
-////                                                           [self removeLoadingScreen];
-////                                                           [self.tableView reloadData];
-//                                                       });
-//                                                       
-//                                                   }];
-//    
-//    [downloadPhotoTask resume];
-//    
-//    return dataArray;
-//}
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        //        [self.progressView setProgress:progress];
+//    });
+}
 
 @end
