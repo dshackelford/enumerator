@@ -13,26 +13,27 @@
 
 -(void)getScoresForFactors:(NSString*)factorStr
 {
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromFactors.php?factors=%@",factorStr]]];
-    [downloadTask resume];
-    
+    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromFactors.php?factors=%@",factorStr]];
 }
 
 -(void)getAllUserScores
 {
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getAllScores.php"]]];
-    [downloadTask resume];
+    //assuming the user has already added a personal username
+    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    NSLog(@"%@",username);
+    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromUsername.php?username=%@",username]];
 }
 
 -(void)postAHighScore:(int)score
 {
+    [self startSessionWithURL:@"http://dshacktech.com/enumerator/postScore.php?username=testUser&factors=12&highScore=27&countIteration=1"];
+}
+
+-(void)startSessionWithURL:(NSString*)urlInit
+{
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
-    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:@"http://dshacktech.com/enumerator/postScore.php?username=testUser&factors=12&highScore=27&countIteration=1"]];
+    NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:urlInit]];
     [downloadTask resume];
 }
 
@@ -40,12 +41,11 @@
 {
     NSData *data = [NSData dataWithContentsOfURL:location];
     
-    _dataArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil]; //technically an array
-//    NSLog(@"%@",_dataArray);
+    _dataArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
+    //post notification that the download is complete
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetData object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:self];
     });
 }
 

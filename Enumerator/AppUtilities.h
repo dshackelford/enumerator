@@ -16,6 +16,7 @@
 
 #define urlGetHighScores @"http://dshacktech.com/getScores.php"
 #define nDidGetData @"didGetData"
+#define nDidGetUserScores @"didGetUserScores"
 #define kPostHighScoresBaseURL @"http://dshacktech.com/getScores.php"
 
 @interface AppUtilities : NSObject

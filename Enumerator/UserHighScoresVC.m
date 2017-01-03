@@ -13,11 +13,11 @@
 
 -(void)viewDidLoad
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:nDidGetData object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:nDidGetUserScores object:nil];
     
     [super viewDidLoad];
     screenSize = [UIScreen mainScreen].bounds.size;
-    self.navigationItem.title = @"USER HIGH Scores";
+    self.navigationItem.title = [NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
     backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:nil];
     self.navigationItem.leftBarButtonItem.title = @"Done";
     
@@ -25,65 +25,24 @@
     self.tableView.delegate = self;
     tableData = nil; //to make the initial table delegate methods work
     
-//    [self addLoadingScreen];
+    [self addLoadingScreen];
     
-//    [self grabHighScores];
+    HighScoreDataHandler* hsHnd = [[HighScoreDataHandler alloc] init];
+    [hsHnd getAllUserScores]; //goes into background, will recieve a notification when the download is complete, which will then display the information
+    
 }
 
-
--(void)grabHighScores
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
-                   ^{
-                       HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
-                       //                       [hsHandler getScoresForFactors:[NSString stringWithFormat:urlGetHighScores]]; //needs to change!!!
-                       [hsHandler getAllUserScores];
-                       
-                   });
-}
-
-//ON MAIN THREAD
+//WILL RUN AFTER NOTIFCATION POSTED BY THE DATA HANDLER
 -(void)didGetData:(NSNotification*)notification
 {
     NSLog(@"Got data");
     HighScoreDataHandler* hsHandler = notification.object;
     NSLog(@"%@",hsHandler.dataArray);
     
-    //    tableData = [hsHandler.dataDict objectForKey:@"scores"];
-    //    tableData = hsHandler.dataArray; //an array ofdictionarys for each user/factors/scors/count etc..
-    [self removeLoadingScreen];
-    [self determineSectionNames:hsHandler.dataArray];
+    tableData = hsHandler.dataArray; //an array ofdictionarys for each user/factors/scors/count etc..
     [self.tableView reloadData];
-}
-
--(void)determineSectionNames:(NSArray*)dataArrayInit
-{
     
-    //i know the names of each possible factors for the section title
-    sectionNames = [[NSMutableArray alloc] init];
-    [sectionNames addObject:[[tableData objectAtIndex:0] valueForKey:@"factors"]];
-    sectionCount = [[NSMutableArray alloc] init];
-    
-    int count = 0;
-    int scoreCount = 0;
-    for(NSDictionary* userDict in tableData)
-    {
-        if(![[sectionNames objectAtIndex:count] isEqualToString:[userDict objectForKey:@"factors"]])
-        {
-            [sectionNames addObject:[userDict objectForKey:@"factors"]];
-            count = count + 1;
-            [sectionCount addObject:[NSNumber numberWithInt:sectionCount]];
-            sectionCount = 0;
-        }
-        else
-        {
-            scoreCount = scoreCount + 1;
-        }
-    }
-    
-    //now i need to know how many scores are in each
-    
-    
+    [self removeLoadingScreen];
 }
 
 -(void)addLoadingScreen
@@ -114,12 +73,13 @@
 #pragma mark - Table View Delegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [sectionNames count]; //maybe each section is based off factors used
+//    return [sectionNames count]; //maybe each section is based off factors used
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //need to figure out how many scores in this section, not some static number
-    return [[sectionCount objectAtIndex:section] integerValue];
+    return [tableData count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -130,17 +90,17 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 50)];
-    UILabel* userLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
-    userLabel.text = [NSString stringWithFormat:@"%@",[sectionNames objectAtIndex:section]];
-    //    userLabel.font = [UIFont systemFontOfSize:15];
-    [headerView addSubview: userLabel];
+    UILabel* factorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
+    factorLabel.text = [NSString stringWithFormat:@"factors"];
+    factorLabel.font = [UIFont systemFontOfSize:22];
+    [headerView addSubview: factorLabel];
     
-    //    UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
-    //    scoreLabel.text = @"Score";
-    //    scoreLabel.font = [UIFont systemFontOfSize:22];
-    //    [headerView addSubview: scoreLabel];
-    //
-    headerView.backgroundColor = [UIColor lightGrayColor];
+    UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
+    scoreLabel.text = @"Score";
+    scoreLabel.font = [UIFont systemFontOfSize:22];
+    [headerView addSubview: scoreLabel];
+    
+    headerView.backgroundColor = [UIColor colorWithRed:219/255 green:223/255 blue:228/255 alpha:0.1];
     
     return headerView;
 }
@@ -149,11 +109,10 @@
 {
     NSDictionary* userDict = [tableData objectAtIndex:indexPath.row];
     
-    NSString* usernameStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
     NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"highScore"]];
     
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
-    cell.textLabel.text = usernameStr;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"factors"]];
     
     UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
     accLabel.text = scoreStr;

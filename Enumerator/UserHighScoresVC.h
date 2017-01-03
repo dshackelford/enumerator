@@ -25,6 +25,6 @@
     
 }
 
--(void)grabHighScores;
+-(void)didGetData:(NSNotification*)notification;
 
 @end
