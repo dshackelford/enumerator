@@ -11,12 +11,14 @@
 		690AD8001E087B19000221AE /* GameViewPopulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 690AD7FF1E087B19000221AE /* GameViewPopulator.m */; };
 		690C6DBB1E04FDF400F93A8C /* SubFactorsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690C6DBA1E04FDF400F93A8C /* SubFactorsView.xib */; };
 		690C6DBD1E04FE0500F93A8C /* SubFactorsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 690C6DBC1E04FE0500F93A8C /* SubFactorsView.m */; };
+		6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */; };
+		6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */; };
+		6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6942C4A91E1C259400C8DF1A /* Main.storyboard */; };
 		698666531E00CA9B00141882 /* HighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 698666521E00CA9B00141882 /* HighScoresVC.m */; };
 		69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A45DCD1DFC858100273FFD /* BPMCell.xib */; };
 		69AC6F511DFB5F800066F6A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F501DFB5F800066F6A2 /* main.m */; };
 		69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F531DFB5F800066F6A2 /* AppDelegate.m */; };
 		69AC6F571DFB5F800066F6A2 /* GameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F561DFB5F800066F6A2 /* GameVC.m */; };
-		69AC6F5A1DFB5F800066F6A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69AC6F581DFB5F800066F6A2 /* Main.storyboard */; };
 		69AC6F5C1DFB5F800066F6A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69AC6F5B1DFB5F800066F6A2 /* Assets.xcassets */; };
 		69AC6F5F1DFB5F800066F6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69AC6F5D1DFB5F800066F6A2 /* LaunchScreen.storyboard */; };
 		69AC6F6A1DFB5F810066F6A2 /* EnumeratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F691DFB5F810066F6A2 /* EnumeratorTests.m */; };
@@ -53,6 +55,11 @@
 		690AD7FF1E087B19000221AE /* GameViewPopulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewPopulator.m; sourceTree = "<group>"; };
 		690C6DBA1E04FDF400F93A8C /* SubFactorsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubFactorsView.xib; sourceTree = "<group>"; };
 		690C6DBC1E04FE0500F93A8C /* SubFactorsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubFactorsView.m; sourceTree = "<group>"; };
+		6942C4A31E1C170B00C8DF1A /* GlobalHighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalHighScoresVC.h; sourceTree = "<group>"; };
+		6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalHighScoresVC.m; sourceTree = "<group>"; };
+		6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHighScoresVC.m; sourceTree = "<group>"; };
+		6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserHighScoresVC.h; sourceTree = "<group>"; };
+		6942C4A91E1C259400C8DF1A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		698666521E00CA9B00141882 /* HighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresVC.m; sourceTree = "<group>"; };
 		698666541E00CAA900141882 /* HighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighScoresVC.h; sourceTree = "<group>"; };
 		69A45DCD1DFC858100273FFD /* BPMCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPMCell.xib; sourceTree = "<group>"; };
@@ -62,7 +69,6 @@
 		69AC6F531DFB5F800066F6A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		69AC6F551DFB5F800066F6A2 /* GameVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameVC.h; sourceTree = "<group>"; };
 		69AC6F561DFB5F800066F6A2 /* GameVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameVC.m; sourceTree = "<group>"; };
-		69AC6F591DFB5F800066F6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69AC6F5B1DFB5F800066F6A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69AC6F5E1DFB5F800066F6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69AC6F601DFB5F800066F6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,12 +153,16 @@
 			children = (
 				69AC6F521DFB5F800066F6A2 /* AppDelegate.h */,
 				69AC6F531DFB5F800066F6A2 /* AppDelegate.m */,
-				69AC6F581DFB5F800066F6A2 /* Main.storyboard */,
+				6942C4A91E1C259400C8DF1A /* Main.storyboard */,
 				6902AB0B1E08ED080048DEC6 /* Game View */,
 				69AC6F861DFB697C0066F6A2 /* HomeVC.h */,
 				69AC6F841DFB69710066F6A2 /* HomeVC.m */,
 				698666541E00CAA900141882 /* HighScoresVC.h */,
 				698666521E00CA9B00141882 /* HighScoresVC.m */,
+				6942C4A31E1C170B00C8DF1A /* GlobalHighScoresVC.h */,
+				6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */,
+				6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */,
+				6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */,
 				6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */,
 				6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */,
 				69AC6F961DFC7F610066F6A2 /* Settings */,
@@ -320,9 +330,9 @@
 				690C6DBB1E04FDF400F93A8C /* SubFactorsView.xib in Resources */,
 				69FE7EB81E065CF600561BAC /* UsernameCell.xib in Resources */,
 				69AC6F5F1DFB5F800066F6A2 /* LaunchScreen.storyboard in Resources */,
+				6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */,
 				69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */,
 				69AC6F5C1DFB5F800066F6A2 /* Assets.xcassets in Resources */,
-				69AC6F5A1DFB5F800066F6A2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */,
 				69AC6F911DFB86A50066F6A2 /* AppUtilities.m in Sources */,
 				69AC6F571DFB5F800066F6A2 /* GameVC.m in Sources */,
 				69FE7EB61E065CED00561BAC /* UsernameCell.m in Sources */,
@@ -356,6 +367,7 @@
 				69AC6F851DFB69710066F6A2 /* HomeVC.m in Sources */,
 				698666531E00CA9B00141882 /* HighScoresVC.m in Sources */,
 				69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */,
+				6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */,
 				6902AB0E1E0B48D20048DEC6 /* HighScoreDataHandler.m in Sources */,
 				69AC6F511DFB5F800066F6A2 /* main.m in Sources */,
 				69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */,
@@ -394,14 +406,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		69AC6F581DFB5F800066F6A2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				69AC6F591DFB5F800066F6A2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		69AC6F5D1DFB5F800066F6A2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

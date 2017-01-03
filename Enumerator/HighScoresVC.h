@@ -8,8 +8,8 @@
 
 
 #import <UIKit/UIKit.h>
-#import "AppUtilities.h"
-#import "HighScoreDataHandler.h"
+#import "GlobalHighScoresVC.h"
+#import "UserHighScoresVC.h"
 
 
 @interface HighScoresVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
@@ -18,13 +18,10 @@
     IBOutlet UIBarButtonItem* backButton;
     
     NSArray* tableData;
-    NSMutableArray* sectionNames;
-    CGSize screenSize;
-    
-    UIView* loadingView;
-    UIActivityIndicatorView* actInd;
     
 }
+
+@property int selectedRow;
 
 -(void)grabHighScores;
 

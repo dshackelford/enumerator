@@ -18,138 +18,84 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:nDidGetData object:nil];
     
     [super viewDidLoad];
-    screenSize = [UIScreen mainScreen].bounds.size;
+//    screenSize = [UIScreen mainScreen].bounds.size;
     self.title = @"High Scores";
     backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:nil];
     self.navigationItem.leftBarButtonItem.title = @"Done";
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    tableData = nil; //to make the initial table delegate methods work
     
-    [self addLoadingScreen];
-    
-    [self grabHighScores];
+    tableData = @[@"Personal High Scores",@"Global High Scores"];
 }
 
 
--(void)grabHighScores
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
-                   ^{
-                       HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
-//                       [hsHandler getScoresForFactors:[NSString stringWithFormat:urlGetHighScores]]; //needs to change!!!
-                       [hsHandler getAllUserScores];
-                       
-                   });
-}
-
-//ON MAIN THREAD
--(void)didGetData:(NSNotification*)notification
-{
-    NSLog(@"Got data");
-    HighScoreDataHandler* hsHandler = notification.object;
-    NSLog(@"%@",hsHandler.dataArray);
-
-//    tableData = [hsHandler.dataDict objectForKey:@"scores"];
-    tableData = hsHandler.dataArray; //an array ofdictionarys for each user/factors/scors/count etc..
-    [self removeLoadingScreen];
-    
-    sectionNames = [[NSMutableArray alloc] init];
-    [sectionNames addObject:[[tableData objectAtIndex:0] valueForKey:@"factors"]];
-    int count = 0;
-    
-    for(NSDictionary* userDict in tableData)
-    {
-        if(![[sectionNames objectAtIndex:count] isEqualToString:[userDict objectForKey:@"factors"]])
-        {
-            [sectionNames addObject:[userDict objectForKey:@"factors"]];
-            count = count + 1;
-        }
-    }
-    
-    [self.tableView reloadData];
-}
-
--(void)addLoadingScreen
-{
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenSize.width, screenSize.height)];
-    //    loadingView.backgroundColor = [UIColor greenColor];
-    
-    actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [actInd setFrame:CGRectMake((screenSize.width/2 - 10), (screenSize.height/2 - 10), 20, 20)];
-    
-    UILabel *lblLoading = [[UILabel alloc] initWithFrame:CGRectMake((screenSize.width/2 - 75), (screenSize.height/2 + 15), 150, 30)];
-    lblLoading.text = @"Loading";
-    lblLoading.textAlignment = NSTextAlignmentCenter;
-    
-    // you will probably need to adjust those frame values to get it centered
-    [actInd startAnimating];
-    [loadingView addSubview:actInd];
-    //    [loadingView addSubview:lblLoading];
-    [self.view addSubview:loadingView];
-}
-
--(void)removeLoadingScreen
-{
-    [actInd stopAnimating];
-    [loadingView removeFromSuperview];
-}
 
 #pragma mark - Table View Delegate Methods
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [sectionNames count]; //maybe each section is based off factors used
-}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //need to figure out how many scores in this section, not some static number
     return [tableData count];
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40; // you can have your own choice, of course
-}
-
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 50)];
-    UILabel* userLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
-    userLabel.text = [NSString stringWithFormat:[sectionNames objectAtIndex:section]];
-//    userLabel.font = [UIFont systemFontOfSize:15];
-    [headerView addSubview: userLabel];
-    
-//    UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
-//    scoreLabel.text = @"Score";
-//    scoreLabel.font = [UIFont systemFontOfSize:22];
-//    [headerView addSubview: scoreLabel];
-//    
-    headerView.backgroundColor = [UIColor lightGrayColor];
-    
-    return headerView;
+    return 0; // you can have your own choice, of course
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* userDict = [tableData objectAtIndex:indexPath.row];
-    
-    NSString* usernameStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
-    NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"highScore"]];
-    
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
-    cell.textLabel.text = usernameStr;
+    cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
     
-    UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
-    accLabel.text = scoreStr;
-
-    [cell addSubview:accLabel];
-    [cell setAccessoryView:accLabel];
-    
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator]; //the grey chevron    
     return cell;
 }
 
--(void)viewWillDisappear:(BOOL)animated
+#pragma mark - Cell Selection
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"didGetData" object:nil];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.selectedRow = (int)indexPath.row;
+    
+    //subsettings with Segmented Control
+    if(self.selectedRow == 0)
+    {
+        //show day Segmented Control
+        [self performSegueWithIdentifier:@"showUserHighScoresVC" sender:self];
+    }
+    else if (self.selectedRow == 1)
+    {
+        [self performSegueWithIdentifier:@"showGlobalHighScoresVC" sender:self];
+    }
 }
+
+//use this for passing information to the new view controller
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //segmented control settings
+    if ([segue.identifier isEqualToString:@"showUserHighScoresVC"])
+    {
+        UserHighScoresVC *destViewController = segue.destinationViewController;
+        
+//        [destViewController setTableData:[[NSMutableArray alloc] initWithArray:@[@"Height",@"Speed"]]];
+//        NSMutableArray* segArray = [[NSMutableArray alloc] initWithArray:@[@[@"MPH",@"Kts"],@[@"ft",@"m"]]];
+//        
+//        [destViewController setSegControlArrays:segArray];
+        
+//        NSString* title = [[tableData objectAtIndex:self.selectedSection] objectAtIndex:self.selectedRow];
+//        NSLog(@"%@",title);
+//        [destViewController setTitle:title];
+    }
+    else if([segue.identifier isEqualToString:@"showGlobalHighScoresVC"])
+    {
+        GlobalHighScoresVC *destViewController = segue.destinationViewController;
+        //                NSMutableArray* data = [[NSMutableArray alloc] initWithArray:@[@"Sunset Red",@"Seagrass Green",@"Ocean Blue",@"Sand Tan",@"Dawnpatrol Grey",]];
+        //            [destViewController setTableData:data];
+        [destViewController setTitle:@"Color Scheme"];
+        
+    }
+}
+
 @end
