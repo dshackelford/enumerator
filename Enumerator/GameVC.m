@@ -256,18 +256,20 @@
 
 -(void)saveScore
 {
-    NSDictionary* highScoreDict = [prefDict objectForKey:kHighScoreDict];
+    NSMutableDictionary* highScoreDict = [[NSMutableDictionary  alloc] init];
+    [highScoreDict addEntriesFromDictionary:[[AppUtilities getPreferences] objectForKey:kHighScoreDict]];
     
     if(count > currentHighScore)
     {
         NSLog(@"New High Score for these Factors!");
         [highScoreDict setValue:[NSNumber numberWithInt:count] forKey:factorStr]; //update the current highscore for the current factor settings in which the game was just played in.
+        
         [prefDict setValue:highScoreDict forKey:kHighScoreDict]; //add the high score dict back into larger dictionary
         [prefDict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
         
         //tell website to update itself?
         HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-        [hsDataHandler postAHighScore:count];
+        [hsDataHandler postAHighScore:count forFactorStr:factorStr];
     }
 }
 

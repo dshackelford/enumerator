@@ -15,7 +15,7 @@
     IBOutlet UITextView* textView;
     IBOutlet UIBarButtonItem* backButton;
     
-    NSArray* tableData;
+    NSMutableArray* tableData;
     NSMutableArray* sectionNames;
     NSMutableArray* sectionCount;
     CGSize screenSize;
@@ -26,5 +26,6 @@
 }
 
 -(void)grabHighScores;
+-(void)didGetData:(NSNotification*)notification;
 
 @end

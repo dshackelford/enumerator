@@ -203,16 +203,17 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="2eZ-fw-VNr" kind="show" identifier="showUserHighScoresVC" id="8MA-2H-bDN"/>
+                        <segue destination="1mw-a3-Xu2" kind="show" identifier="showGlobalHighScoresVC" id="bCL-sn-rxX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aq9-QO-QEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407" y="863"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Global High ScoresVC-->
         <scene sceneID="Xsv-Pl-YHf">
             <objects>
-                <tableViewController id="1mw-a3-Xu2" sceneMemberID="viewController">
+                <tableViewController id="1mw-a3-Xu2" customClass="GlobalHighScoresVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XmO-3A-R2c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -23,6 +23,7 @@
     UIView* loadingView;
     UIActivityIndicatorView* actInd;
     
+    NSDictionary* scoresDict;
 }
 
 -(void)didGetData:(NSNotification*)notification;

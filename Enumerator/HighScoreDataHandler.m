@@ -24,9 +24,17 @@
     [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromUsername.php?username=%@",username]];
 }
 
--(void)postAHighScore:(int)score
+//will retrun an ordered array of dictionaries that are at most 9 long, with the 10th item being the users scores?
+-(void)getAllScores
 {
-    [self startSessionWithURL:@"http://dshacktech.com/enumerator/postScore.php?username=testUser&factors=12&highScore=27&countIteration=1"];
+        [self startSessionWithURL:@"http://dshacktech.com/enumerator/getAllScores.php"];
+}
+
+-(void)postAHighScore:(int)score forFactorStr:(NSString*)factorStr
+{
+    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    
+    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/postScore.php?username=%@&factors=%@&highScore=%d&countIteration=1",username,factorStr,score]];
 }
 
 -(void)startSessionWithURL:(NSString*)urlInit

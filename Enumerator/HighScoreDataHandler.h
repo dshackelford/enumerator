@@ -19,7 +19,8 @@
 -(void)getScoresForFactors:(NSString*)factorStr;
 -(void)getAllScoresByFactors;
 -(void)getAllUserScores;
+-(void)getAllScores;
 -(void)getScoresForBPM:(NSString*)bpm;
--(void)postAHighScore:(int)score;
+-(void)postAHighScore:(int)score forFactorStr:(NSString*)factorStr;
 
 @end

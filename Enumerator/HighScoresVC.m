@@ -71,31 +71,31 @@
     }
 }
 
-//use this for passing information to the new view controller
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    //segmented control settings
-    if ([segue.identifier isEqualToString:@"showUserHighScoresVC"])
-    {
-        UserHighScoresVC *destViewController = segue.destinationViewController;
-        
-//        [destViewController setTableData:[[NSMutableArray alloc] initWithArray:@[@"Height",@"Speed"]]];
-//        NSMutableArray* segArray = [[NSMutableArray alloc] initWithArray:@[@[@"MPH",@"Kts"],@[@"ft",@"m"]]];
+////use this for passing information to the new view controller
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    //segmented control settings
+//    if ([segue.identifier isEqualToString:@"showUserHighScoresVC"])
+//    {
+//        UserHighScoresVC *destViewController = segue.destinationViewController;
 //        
-//        [destViewController setSegControlArrays:segArray];
-        
-//        NSString* title = [[tableData objectAtIndex:self.selectedSection] objectAtIndex:self.selectedRow];
-//        NSLog(@"%@",title);
-//        [destViewController setTitle:title];
-    }
-    else if([segue.identifier isEqualToString:@"showGlobalHighScoresVC"])
-    {
-        GlobalHighScoresVC *destViewController = segue.destinationViewController;
-        //                NSMutableArray* data = [[NSMutableArray alloc] initWithArray:@[@"Sunset Red",@"Seagrass Green",@"Ocean Blue",@"Sand Tan",@"Dawnpatrol Grey",]];
-        //            [destViewController setTableData:data];
-        [destViewController setTitle:@"Color Scheme"];
-        
-    }
-}
+////        [destViewController setTableData:[[NSMutableArray alloc] initWithArray:@[@"Height",@"Speed"]]];
+////        NSMutableArray* segArray = [[NSMutableArray alloc] initWithArray:@[@[@"MPH",@"Kts"],@[@"ft",@"m"]]];
+////        
+////        [destViewController setSegControlArrays:segArray];
+//        
+////        NSString* title = [[tableData objectAtIndex:self.selectedSection] objectAtIndex:self.selectedRow];
+////        NSLog(@"%@",title);
+////        [destViewController setTitle:title];
+//    }
+//    else if([segue.identifier isEqualToString:@"showGlobalHighScoresVC"])
+//    {
+//        GlobalHighScoresVC *destViewController = segue.destinationViewController;
+//        //                NSMutableArray* data = [[NSMutableArray alloc] initWithArray:@[@"Sunset Red",@"Seagrass Green",@"Ocean Blue",@"Sand Tan",@"Dawnpatrol Grey",]];
+//        //            [destViewController setTableData:data];
+////        [destViewController setTitle:@"Color Scheme"];
+//        
+//    }
+//}
 
 @end
