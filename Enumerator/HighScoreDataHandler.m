@@ -30,15 +30,24 @@
         [self startSessionWithURL:@"http://dshacktech.com/enumerator/getAllScores.php"];
 }
 
--(void)postAHighScore:(int)score forFactorStr:(NSString*)factorStr
+-(void)postAHighScore:(int)score
 {
     NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    NSString* f1 = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] objectForKey:kFactor1]];
+    NSString* f2 = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] objectForKey:kFactor2]];
+    int countIter = [[[AppUtilities getPreferences] objectForKey:kCountIteration] intValue];
+    int lives = [[[AppUtilities getPreferences] objectForKey:kNumOfLives] intValue];
+    int bpm = [[[AppUtilities getPreferences] objectForKey:kBeatsPerMinute] intValue];
     
-    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/postScore.php?username=%@&factors=%@&highScore=%d&countIteration=1",username,factorStr,score]];
+    NSString* gameType = @"custom"; //need to keep this in the local settigns file??
+    
+    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/postScore.php?username=%@&factor1=%@&factor2=%@&score=%d&countIteration=%d&lives=%d&BPM=%d&gameType=%@",username,f1,f2,score,countIter,lives,bpm,gameType]];
 }
 
 -(void)startSessionWithURL:(NSString*)urlInit
 {
+    NSLog(@"%@",urlInit);
+    
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:urlInit]];

@@ -51,14 +51,16 @@
     {
         NSDictionary* userDictI = [dataArrayInit objectAtIndex:i];
         NSMutableArray* sectionRowDicts = [[NSMutableArray alloc]init];
+        NSString* factorsI = [NSString stringWithFormat:@"%@%@",[userDictI objectForKey:@"factor1"],[userDictI objectForKey:@"factor2"]];
 //        NSLog(@"i = %d",i);
         
         for(int j = i; j < [dataArrayInit count]; j = j + 1)
         {
 //            NSLog(@"j = %d",i);
             NSDictionary* userDictJ = [dataArrayInit objectAtIndex:j];
+            NSString* factorsJ = [NSString stringWithFormat:@"%@%@",[userDictJ objectForKey:@"factor1"],[userDictJ objectForKey:@"factor2"]];
             
-            if([[userDictI objectForKey:@"factors"] isEqualToString:[userDictJ objectForKey:@"factors"]])
+            if([factorsI isEqualToString:factorsJ])
             {
                 [sectionRowDicts addObject:userDictJ];
                 
@@ -74,7 +76,8 @@
                 break;
             }
         }
-        [sectionNames addObject:[NSString stringWithFormat:@"Factors: %@",[userDictI objectForKey:@"factors"]]];
+        [sectionNames addObject:[NSString stringWithFormat:@"Factors: %@ | %@",[userDictI objectForKey:@"factor1"],[userDictI objectForKey:@"factor2"]]];
+        NSLog(@"%@",sectionRowDicts);
         [tableData addObject:sectionRowDicts]; //all the rows for one section in an array
     }
 
@@ -134,7 +137,7 @@
     scoreLabel.font = [UIFont systemFontOfSize:22];
     [headerView addSubview: scoreLabel];
 
-    headerView.backgroundColor = [UIColor colorWithRed:219/255 green:223/255 blue:228/255 alpha:0.1];
+    headerView.backgroundColor = [UIColor colorWithRed:215.f/255.0 green:215.f/255.0 blue:215.f/255.0 alpha:1];
     
     return headerView;
 }
@@ -144,7 +147,7 @@
     NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     NSString* usernameStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
-    NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"highScore"]];
+    NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
     
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
     cell.textLabel.text = usernameStr;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppUtilities.h"
 #import "HighScoreDataHandler.h"
+#import "DBManager.h"
 
 @interface UserHighScoresVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -16,16 +17,15 @@
     IBOutlet UIBarButtonItem* backButton;
     
     NSArray* tableData;
-    NSMutableArray* sectionNames;
-    NSMutableArray* sectionCount;
     CGSize screenSize;
     
     UIView* loadingView;
     UIActivityIndicatorView* actInd;
     
     NSDictionary* scoresDict;
+    
+    DBManager* db;
 }
 
--(void)didGetData:(NSNotification*)notification;
 
 @end

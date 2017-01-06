@@ -13,6 +13,14 @@
 
 #pragma mark - File Utitlies
 
++(NSString*) getPathToAppDatabase
+{
+    NSString* basePath = NSHomeDirectory();
+    
+    NSString* newPath = [basePath stringByAppendingPathComponent:@"Documents/HighScores.sqlite"];
+    return newPath;
+}
+
 +(NSDictionary*)getPreferences
 {
     if ([AppUtilities doesFileExistAtPath:[AppUtilities getPathToUserInfoFile]] == NO)

@@ -26,6 +26,7 @@
 
 +(NSString*)getPathToUserInfoFile;
 +(NSDictionary*)getPreferences;
++(NSString*) getPathToAppDatabase;
 
 +(BOOL)doesFileExistAtPath: (NSString*)path;
 

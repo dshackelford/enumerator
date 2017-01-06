@@ -21,6 +21,6 @@
 -(void)getAllUserScores;
 -(void)getAllScores;
 -(void)getScoresForBPM:(NSString*)bpm;
--(void)postAHighScore:(int)score forFactorStr:(NSString*)factorStr;
+-(void)postAHighScore:(int)score;
 
 @end

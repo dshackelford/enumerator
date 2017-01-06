@@ -9,11 +9,28 @@
 #import <Foundation/Foundation.h>
 #import "UserHighScoresVC.h"
 
+typedef enum
+{
+    dbCol_factor1 = 0,
+    dbCol_factor2 = 1,
+    dbCol_score = 2,
+    dbCol_countIteration = 3,
+    dbCol_lives = 4,
+    dbCol_BPM = 5,
+    dbCol_gameType = 6,
+}HighScoresDBColumn;
+
+
 @implementation UserHighScoresVC
 
 -(void)viewDidLoad
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetData:) name:nDidGetUserScores object:nil];
+    db = [[DBManager alloc] init];
+    [db openDatabase];
+    
+    NSMutableArray* dbArray = [db getAllScores]; //gets the users scores;
+    tableData = [NSArray arrayWithArray:dbArray];
+    [db closeDatabase];
     
     [super viewDidLoad];
     screenSize = [UIScreen mainScreen].bounds.size;
@@ -23,50 +40,7 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    tableData = nil; //to make the initial table delegate methods work
-    
-//    [self addLoadingScreen];
-    
-    NSDictionary* prefDict = [AppUtilities getPreferences];
-    scoresDict = [prefDict objectForKey:kHighScoreDict];
-    tableData = [scoresDict allKeys];
-    
-//    HighScoreDataHandler* hsHnd = [[HighScoreDataHandler alloc] init];
-//    [hsHnd getAllUserScores]; //goes into background, will recieve a notification when the download is complete, which will then display the information
-    
 }
-//
-////WILL RUN AFTER NOTIFCATION POSTED BY THE DATA HANDLER
-//-(void)didGetData:(NSNotification*)notification
-//{
-//    NSLog(@"Got data");
-//    HighScoreDataHandler* hsHandler = notification.object;
-//    NSLog(@"%@",hsHandler.dataArray);
-//    
-//    tableData = hsHandler.dataArray; //an array ofdictionarys for each user/factors/scors/count etc..
-//    [self.tableView reloadData];
-//    
-//    [self removeLoadingScreen];
-//}
-
-//-(void)addLoadingScreen
-//{
-//    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenSize.width, screenSize.height)];
-//    //    loadingView.backgroundColor = [UIColor greenColor];
-//    
-//    actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    [actInd setFrame:CGRectMake((screenSize.width/2 - 10), (screenSize.height/2 - 10), 20, 20)];
-//    
-//    UILabel *lblLoading = [[UILabel alloc] initWithFrame:CGRectMake((screenSize.width/2 - 75), (screenSize.height/2 + 15), 150, 30)];
-//    lblLoading.text = @"Loading";
-//    lblLoading.textAlignment = NSTextAlignmentCenter;
-//    
-//    // you will probably need to adjust those frame values to get it centered
-//    [actInd startAnimating];
-//    [loadingView addSubview:actInd];
-//    //    [loadingView addSubview:lblLoading];
-//    [self.view addSubview:loadingView];
-//}
 
 -(void)removeLoadingScreen
 {
@@ -104,20 +78,20 @@
     scoreLabel.font = [UIFont systemFontOfSize:22];
     [headerView addSubview: scoreLabel];
     
-    headerView.backgroundColor = [UIColor colorWithRed:219/255 green:223/255 blue:228/255 alpha:0.1];
+    headerView.backgroundColor = [UIColor colorWithRed:215.f/255.0 green:215.f/255.0 blue:215.f/255.0 alpha:1];
     
     return headerView;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSDictionary* userDict = [tableData objectAtIndex:indexPath.row];
-    
-    NSString* scoreStr = [NSString stringWithFormat:@"%@",[scoresDict objectForKey:[tableData objectAtIndex:indexPath.row]]];
-    
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[tableData objectAtIndex:indexPath.row]];
+
+    NSString* factorStr = [NSString stringWithFormat:@"%@ | %@",[[tableData objectAtIndex:indexPath.row] objectAtIndex:dbCol_factor1],[[tableData objectAtIndex:indexPath.row] objectAtIndex:dbCol_factor2]];
+    NSLog(@"%@",factorStr);
+    cell.textLabel.text = factorStr;
     
+    NSString* scoreStr = [NSString stringWithFormat:@"%@",[[tableData objectAtIndex:indexPath.row] objectAtIndex:dbCol_score]];
     UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
     accLabel.text = scoreStr;
     
@@ -127,8 +101,4 @@
     return cell;
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"didGetData" object:nil];
-}
 @end

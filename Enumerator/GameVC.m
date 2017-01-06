@@ -24,6 +24,11 @@
 {
     [super viewDidLoad];
     
+    db = [[DBManager alloc] init];
+//    [db openDatabase];
+//    //get the current high scores for this game
+//    [db closeDatabase];
+    
     screenSize = [UIScreen mainScreen].bounds.size;
     prefDict = [AppUtilities getPreferences];
     
@@ -35,19 +40,17 @@
     factor1 = [[prefDict objectForKey:kFactor1] intValue]; //base mutliples
     factor2 = [[prefDict objectForKey:kFactor2] intValue];
     
+    currentHighScore = [[[prefDict objectForKey:kHighScoreDict] objectForKey:factorStr] intValue]; //should have more input like the factors crrently at play.
+
     if (factor1 < factor2) //used to standarize having the smaller factor come first for dictionary call
     {
-        factorKey = [NSNumber numberWithInt:(factor1*10 + factor2)];
+        factorStr = [NSString stringWithFormat:@"%d %d",factor1,factor2];
     }
     else
     {
-        factorKey = [NSNumber numberWithInt:(factor2*10 + factor1)];
+        factorStr = [NSString stringWithFormat:@"%d %d",factor2,factor1];
     }
     
-    factorStr = [NSString stringWithFormat:@"%@",factorKey];
-    
-    currentHighScore = [[[prefDict objectForKey:kHighScoreDict] objectForKey:factorStr] intValue]; //should have more input like the factors crrently at play.
-
     double frequency = [[prefDict objectForKey:kBeatsPerMinute] doubleValue];
     period = 60/frequency;
 
@@ -256,21 +259,47 @@
 
 -(void)saveScore
 {
-    NSMutableDictionary* highScoreDict = [[NSMutableDictionary  alloc] init];
-    [highScoreDict addEntriesFromDictionary:[[AppUtilities getPreferences] objectForKey:kHighScoreDict]];
+    //website posts the scores and auto updates itself if the score is the same username and categories
+    HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
     
-    if(count > currentHighScore)
+    [db openDatabase];
+    
+    NSMutableArray* scoreArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:88 andGameType:@"custom"];
+    
+    if([scoreArr count] > 0 && [[scoreArr objectAtIndex:0] intValue] < count) //if the score exists and is lower then the just played score, then update
     {
-        NSLog(@"New High Score for these Factors!");
-        [highScoreDict setValue:[NSNumber numberWithInt:count] forKey:factorStr]; //update the current highscore for the current factor settings in which the game was just played in.
+        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:88 andGameType:@"custom"];
         
-        [prefDict setValue:highScoreDict forKey:kHighScoreDict]; //add the high score dict back into larger dictionary
-        [prefDict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
-        
-        //tell website to update itself?
-        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-        [hsDataHandler postAHighScore:count forFactorStr:factorStr];
+        //determine if we should update the global table, or just post it
+        [hsDataHandler postAHighScore:count];
     }
+    else if([scoreArr count] == 0) //no score exists for this category
+    {
+        [db addScore:count factor1:factor1 factor2:factor2 count:countIter lives:numOfLives BPM:88 gameType:@"custom"];
+        //determine if we should update the global table, or just post it
+        [hsDataHandler postAHighScore:count];
+    }
+    
+    [db closeDatabase];
+//    
+//    NSMutableDictionary* highScoreDict = [[NSMutableDictionary  alloc] init];
+//    [highScoreDict addEntriesFromDictionary:[[AppUtilities getPreferences] objectForKey:kHighScoreDict]];
+//    
+//    if(count > currentHighScore)
+//    {
+//        
+//        NSLog(@"New High Score for these Factors!");
+//        [highScoreDict setValue:[NSNumber numberWithInt:count] forKey:factorStr]; //update the current highscore for the current factor settings in which the game was just played in.
+//        
+//        [prefDict setValue:highScoreDict forKey:kHighScoreDict]; //add the high score dict back into larger dictionary
+//        [prefDict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
+//        
+//        //website posts the scores and auto updates itself if the score is the same username and categories
+//        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+//        
+//        //determine if we should update the global table, or just post it
+//        [hsDataHandler postAHighScore:count];
+//    }
 }
 
 @end
