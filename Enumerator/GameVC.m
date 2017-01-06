@@ -25,9 +25,7 @@
     [super viewDidLoad];
     
     db = [[DBManager alloc] init];
-//    [db openDatabase];
-//    //get the current high scores for this game
-//    [db closeDatabase];
+
     
     screenSize = [UIScreen mainScreen].bounds.size;
     prefDict = [AppUtilities getPreferences];
@@ -39,20 +37,25 @@
     countIter = [[prefDict objectForKey:kCountIteration] intValue];
     factor1 = [[prefDict objectForKey:kFactor1] intValue]; //base mutliples
     factor2 = [[prefDict objectForKey:kFactor2] intValue];
-    
-    currentHighScore = [[[prefDict objectForKey:kHighScoreDict] objectForKey:factorStr] intValue]; //should have more input like the factors crrently at play.
 
-    if (factor1 < factor2) //used to standarize having the smaller factor come first for dictionary call
-    {
-        factorStr = [NSString stringWithFormat:@"%d %d",factor1,factor2];
-    }
-    else
-    {
-        factorStr = [NSString stringWithFormat:@"%d %d",factor2,factor1];
-    }
     
     double frequency = [[prefDict objectForKey:kBeatsPerMinute] doubleValue];
     period = 60/frequency;
+    bpm = frequency;
+    gameType = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kGameType]];
+    
+    [db openDatabase];
+    
+    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
+    
+    [db closeDatabase];
+    
+    if([dbArr count] > 0)
+    {
+        currentHighScore = [[dbArr objectAtIndex:0] intValue];
+        NSLog(@"current High Score%d",currentHighScore);
+    }
+    
 
     [self addGameInterface];
     
@@ -61,10 +64,10 @@
 
 -(void)addGameInterface
 {
-    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self withPrefDict:prefDict behindBackButton:backButton withHighScoreKey:factorStr];
+    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self withPrefDict:prefDict behindBackButton:backButton];
     
     //INFO BAR
-    infoView = [gamePopulator makeInfoBarView];
+    infoView = [gamePopulator makeInfoBarViewWithHighScore:currentHighScore];
     
     //MAKES THE COUNT LABLE
     countLabel = [gamePopulator makeCountLabel];
@@ -210,9 +213,8 @@
     {
         //you loose!
         count = count - 1; //the count increases one more time after failure, this is the correction for that
-        [self saveScore];
-        
         [self gameOver];
+        
         return;
     }
     UIImageView* lifeBar = [lifeBarArr objectAtIndex:livesLeft];
@@ -231,15 +233,16 @@
 {
     beatCount = 0;
     [metronomeImage removeFromSuperview];
-    [self.view insertSubview:[metronome objectAtIndex:0] aboveSubview:factorButton2];
+    if([metronome count] > 0)
+    {
+        [self.view insertSubview:[metronome objectAtIndex:0] aboveSubview:factorButton2];
+    }
 }
 
 //what about beating your high schore?
 //also show the score after when? or is just the number you got to?
 -(void)gameOver
 {
-//    self.view.backgroundColor = [UIColor lightGrayColor];
-    
     infoView.hidden = YES;
     countLabel.hidden = YES;
     factorButton1.hidden = YES;
@@ -254,52 +257,48 @@
     settingsButton.hidden = NO;
     homeButton.hidden = NO;
     
-    scoreView = [gamePopulator makeScoreBox:count];
-}
-
--(void)saveScore
-{
-    //website posts the scores and auto updates itself if the score is the same username and categories
-    HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-    
     [db openDatabase];
     
-    NSMutableArray* scoreArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:88 andGameType:@"custom"];
-    
-    if([scoreArr count] > 0 && [[scoreArr objectAtIndex:0] intValue] < count) //if the score exists and is lower then the just played score, then update
-    {
-        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:88 andGameType:@"custom"];
-        
-        //determine if we should update the global table, or just post it
-        [hsDataHandler postAHighScore:count];
-    }
-    else if([scoreArr count] == 0) //no score exists for this category
-    {
-        [db addScore:count factor1:factor1 factor2:factor2 count:countIter lives:numOfLives BPM:88 gameType:@"custom"];
-        //determine if we should update the global table, or just post it
-        [hsDataHandler postAHighScore:count];
-    }
+    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
     
     [db closeDatabase];
-//    
-//    NSMutableDictionary* highScoreDict = [[NSMutableDictionary  alloc] init];
-//    [highScoreDict addEntriesFromDictionary:[[AppUtilities getPreferences] objectForKey:kHighScoreDict]];
-//    
-//    if(count > currentHighScore)
-//    {
-//        
-//        NSLog(@"New High Score for these Factors!");
-//        [highScoreDict setValue:[NSNumber numberWithInt:count] forKey:factorStr]; //update the current highscore for the current factor settings in which the game was just played in.
-//        
-//        [prefDict setValue:highScoreDict forKey:kHighScoreDict]; //add the high score dict back into larger dictionary
-//        [prefDict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
-//        
-//        //website posts the scores and auto updates itself if the score is the same username and categories
-//        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-//        
-//        //determine if we should update the global table, or just post it
-//        [hsDataHandler postAHighScore:count];
-//    }
+    
+    //alert user if high score is reached
+    if([dbArr count] == 0)
+    {
+        //check for username != 'username', throw up keyboard for username to post to global scores
+        [db openDatabase];
+        [db addScore:count factor1:factor1 factor2:factor2 count:countIter lives:numOfLives BPM:bpm gameType:gameType];
+        [db closeDatabase];
+        
+        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+        [hsDataHandler postAHighScore:count];
+    }
+    else if(count > currentHighScore)
+    {
+        //check for username != 'username', throw up keyboard for username to post to global scores
+        [db openDatabase];
+        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
+        [db closeDatabase];
+        
+        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+        [hsDataHandler postAHighScore:count];
+    }
+
+    
+    int scored = [self findScore];
+    NSLog(@"oldscore %d vs new %d",count, scored);
+    
+    //update current highscore to posting?
+    //tell user highscore was achieved
+    scoreView = [gamePopulator makeScoreBox:count withCurrentHighScore:currentHighScore];
+
+}
+
+-(int)findScore
+{
+    int scored = 0.3*count + 0.5*bpm - 0.2*numOfLives;
+    return scored;
 }
 
 @end

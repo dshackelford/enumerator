@@ -25,16 +25,17 @@
     int factor1;
     int factor2;
     
-    NSString* factorStr;
     int iter1;
     int iter2;
     int numOfLives;
     int countIter;
     int currentHighScore;
     
-    double period;
+    double period; //used for decimal calculation
+        int bpm; //used for database
     int livesLeft;
     int score;
+    NSString* gameType;
     
     CGSize screenSize;
     

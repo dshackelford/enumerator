@@ -86,7 +86,6 @@
 -(void)addLoadingScreen
 {
     loadingView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenSize.width, screenSize.height)];
-    //    loadingView.backgroundColor = [UIColor greenColor];
     
     actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [actInd setFrame:CGRectMake((screenSize.width/2 - 10), (screenSize.height/2 - 10), 20, 20)];
@@ -98,7 +97,6 @@
     // you will probably need to adjust those frame values to get it centered
     [actInd startAnimating];
     [loadingView addSubview:actInd];
-    //    [loadingView addSubview:lblLoading];
     [self.view addSubview:loadingView];
 }
 
@@ -129,7 +127,7 @@
     UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 50)];
     UILabel* userLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
     userLabel.text = [NSString stringWithFormat:@"%@",[sectionNames objectAtIndex:section]];
-    //    userLabel.font = [UIFont systemFontOfSize:15];
+
     [headerView addSubview: userLabel];
     
     UILabel* scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 75, 0, 200, 50)];
@@ -146,7 +144,7 @@
 {
     NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    NSString* usernameStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
+    NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",(int)indexPath.row + 1,[userDict objectForKey:@"username"]];
     NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
     
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];

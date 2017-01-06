@@ -41,7 +41,23 @@
     
     NSString* gameType = @"custom"; //need to keep this in the local settigns file??
     
-    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/postScore.php?username=%@&factor1=%@&factor2=%@&score=%d&countIteration=%d&lives=%d&BPM=%d&gameType=%@",username,f1,f2,score,countIter,lives,bpm,gameType]];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
+    
+    NSURL *url = [NSURL URLWithString:@"http://dshacktech.com/enumerator/postScore.php"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSString *params =[NSString stringWithFormat:@"username=%@&factor1=%@&factor2=%@&score=%d&countIteration=%d&lives=%d&BPM=%d&gameType=%@",username,f1,f2,score,countIter,lives,bpm,gameType];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask * dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        NSLog(@"Data = %@", [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]);
+    }];
+    
+    [dataTask resume];
 }
 
 -(void)startSessionWithURL:(NSString*)urlInit

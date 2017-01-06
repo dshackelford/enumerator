@@ -58,13 +58,13 @@
     double heightScoreBox;
 }
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit withHighScoreKey:(NSString*)factorKeyInit;
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit;
 
--(UIView*)makeInfoBarView;
+-(UIView*)makeInfoBarViewWithHighScore:(int)highScore;
 -(UILabel*)makeCountLabel;
 -(NSMutableArray*)makeFactorButtons:(int)howMany;
 -(NSMutableArray*)makeLifeBarArray:(int)numLives;
 -(NSMutableArray*)makeMetronomeImages:(double)period andFastFrameRate:(double)fastFrameRate;
--(UIView*)makeScoreBox:(int)score;
+-(UIView*)makeScoreBox:(int)score withCurrentHighScore:(int)currentHighScore;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation GameViewPopulator
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit withHighScoreKey:(NSString*)factorKeyInit
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit
 {
     self = [super init];
     
@@ -20,7 +20,6 @@
     screenSize = screenSizeInit;
     prefDict = prefDictInit;
     backButton = backButtonInit;
-    factorKey = factorKeyInit;
     
     //Info Bar view
     xInfo = 10;
@@ -66,7 +65,7 @@
 }
 
 
--(UIView*)makeInfoBarView
+-(UIView*)makeInfoBarViewWithHighScore:(int)highScore
 {
     UIView* infoView = [[UIView alloc] initWithFrame:CGRectMake(xInfo, yInfo, widthInfo, heightInfo)];
     infoView.backgroundColor = [UIColor lightGrayColor];
@@ -74,7 +73,7 @@
     infoView.layer.borderWidth = 3;
     
     UITextView* infoTextView = [[UITextView alloc] initWithFrame:CGRectMake(widthInfo - 200,-3,200,heightInfo)];//200 are the width and height of the text box
-    infoTextView.text = [NSString stringWithFormat:@"Beats/min: %@ \nHigh Score: %d",[prefDict objectForKey:kBeatsPerMinute],[[[prefDict objectForKey:kHighScoreDict] objectForKey:factorKey] intValue]];
+    infoTextView.text = [NSString stringWithFormat:@"Beats/min: %@ \nHigh Score: %d",[prefDict objectForKey:kBeatsPerMinute],highScore];
     infoTextView.backgroundColor = [UIColor clearColor];
     infoTextView.textAlignment = NSTextAlignmentRight;
     infoTextView.editable = NO;
@@ -176,14 +175,14 @@
     return arr;
 }
 
--(UIView*)makeScoreBox:(int)score
+-(UIView*)makeScoreBox:(int)score withCurrentHighScore:(int)currentHighScore
 {
     UIView* scoreView = [[UIView alloc] initWithFrame:CGRectMake(xScoreBox, yScoreBox, widthScoreBox, heightScoreBox)];
     scoreView.layer.borderWidth = 5;
     scoreView.backgroundColor = [UIColor whiteColor];
     
     UITextView* scoreTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, scoreView.frame.size.width - 2*10,200 - 2*10)];
-    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %@",[prefDict objectForKey:kFactor1],[prefDict objectForKey:kFactor2],[prefDict objectForKey:kBeatsPerMinute],score,[[prefDict objectForKey:kHighScoreDict] objectForKey:factorKey]];
+    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %d",[prefDict objectForKey:kFactor1],[prefDict objectForKey:kFactor2],[prefDict objectForKey:kBeatsPerMinute],score,currentHighScore];
     scoreTextView.font = [UIFont systemFontOfSize:25];
     scoreTextView.backgroundColor = [UIColor clearColor];
     

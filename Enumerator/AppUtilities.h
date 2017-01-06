@@ -13,6 +13,7 @@
 #define kHighScoreDict @"highScoreDict"
 #define kCountIteration @"countIteration"
 #define kNumOfLives @"numberOfLives"
+#define kGameType @"gameType"
 
 #define urlGetHighScores @"http://dshacktech.com/getScores.php"
 #define nDidGetData @"didGetData"

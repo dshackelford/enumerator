@@ -140,6 +140,8 @@
 		6942C4B21E1EF55700C8DF1A /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
+				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
 				6942C4AC1E1EF55000C8DF1A /* DBManager.h */,
 				6942C4AD1E1EF55000C8DF1A /* DBManager.m */,
 				6942C4AE1E1EF55000C8DF1A /* DBTableColumn.h */,
@@ -196,8 +198,6 @@
 				6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */,
 				6942C4B21E1EF55700C8DF1A /* DB */,
 				69AC6F961DFC7F610066F6A2 /* Settings */,
-				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
-				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
 				69AC6F5B1DFB5F800066F6A2 /* Assets.xcassets */,
 				69AC6F5D1DFB5F800066F6A2 /* LaunchScreen.storyboard */,
 				69AC6F601DFB5F800066F6A2 /* Info.plist */,

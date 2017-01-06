@@ -390,6 +390,8 @@ typedef enum
             
         }
     }
+    
+    
 }
 
 
@@ -447,8 +449,13 @@ typedef enum
             }
         }
     }
+    else
+    {
+        NSLog(@"SQLITE3_PREPARE FAILED %s", sqlite3_errmsg(database));
+    }
     sqlite3_finalize(statement);
     return results;
+    
 }
 
 -(Boolean)deleteAllScores
@@ -470,13 +477,15 @@ typedef enum
 {
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM HighScores WHERE factor1 = '%d' AND factor2 = '%d' AND countIteration = '%d' AND lives = '%d' and BPM = '%d' AND gameType = '%@'", factor1,factor2,countIter,lives,BPM,gameTypeStr];
     NSMutableArray* results = [self executeQuery:sql forReturnOf:dbCol_score];
-    
+    NSLog(@"%@",sql);
     return results;
 }
 
 -(Boolean)updateScore:(int)score ForFactor1:(int)factor1 andFactor2:(int)factor2 countIteration:(int)countIter lives:(int)lives BPM:(int)BPM andGameType:(NSString*)gameTypeStr
 {
-    NSString *sql = [NSString stringWithFormat:@"UPDATE HighScores SET score = '%d' WHERE factor1 = '%d' AND factor2 = '%d' AND countIteration = '%d' AND lives = '%d' and BPM = '%d' AND gameType = '%@'", score, factor1,factor2,countIter,lives,BPM,gameTypeStr];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE HighScores SET score = '%d' WHERE factor1 = '%d' AND factor2 = '%d' AND countIteration = '%d' AND lives = '%d' AND BPM = '%d' AND gameType = '%@'", score, factor1,factor2,countIter,lives,BPM,gameTypeStr];
+    NSLog(@"update: %@",sql);
+    
     return [self executeQuery:sql];
 
 }
