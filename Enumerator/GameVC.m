@@ -46,7 +46,7 @@
     
     [db openDatabase];
     
-    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
+    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
     
     [db closeDatabase];
     
@@ -56,7 +56,6 @@
         NSLog(@"current High Score%d",currentHighScore);
     }
     
-
     [self addGameInterface];
     
     [self startGame];
@@ -196,9 +195,27 @@
     countLabel.hidden = NO;
     factorButton1.hidden = NO;
     factorButton2.hidden = NO;
+    factorButton1.backgroundColor = [UIColor whiteColor];
+    factorButton2.backgroundColor = [UIColor whiteColor];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self resetLifeBar];
     [scoreView removeFromSuperview];
+    
+    [db openDatabase];
+    
+    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
+    
+    [db closeDatabase];
+    
+    if([dbArr count] > 0)
+    {
+        currentHighScore = [[dbArr objectAtIndex:0] intValue];
+        NSLog(@"current High Score%d",currentHighScore);
+    }
+    
+    [infoView removeFromSuperview];
+    infoView = [gamePopulator makeInfoBarViewWithHighScore:currentHighScore];
     
     //restart the count/iterations/timers/lives
     [self startGame];
@@ -259,7 +276,7 @@
     
     [db openDatabase];
     
-    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
+    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
     
     [db closeDatabase];
     
@@ -278,7 +295,7 @@
     {
         //check for username != 'username', throw up keyboard for username to post to global scores
         [db openDatabase];
-        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 countIteration:countIter lives:numOfLives BPM:bpm andGameType:gameType];
+        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
         [db closeDatabase];
         
         HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
@@ -297,7 +314,7 @@
 
 -(int)findScore
 {
-    int scored = 0.3*count + 0.5*bpm - 0.2*numOfLives;
+    int scored = 0.2*count + 0.6*bpm - numOfLives*(abs(factor1 - factor2)) + 0.4*countIter;
     return scored;
 }
 

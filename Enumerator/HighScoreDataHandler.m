@@ -60,6 +60,29 @@
     [dataTask resume];
 }
 
+
+-(void)updateUsernameChange:(NSString*)oldUsername toNewUsername:(NSString*)newUsername
+{
+
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
+    
+    NSURL *url = [NSURL URLWithString:@"http://dshacktech.com/enumerator/updateUsername.php"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSString *params =[NSString stringWithFormat:@"newUsername=%@&oldUsername=%@",newUsername,oldUsername];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask * dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                       {
+                                           NSLog(@"Data = %@", [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]);
+                                       }];
+    
+    [dataTask resume];
+}
+
+
 -(void)startSessionWithURL:(NSString*)urlInit
 {
     NSLog(@"%@",urlInit);
@@ -70,6 +93,7 @@
     [downloadTask resume];
 }
 
+#pragma mark - NSURLSession Delegate Methods
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
 {
     NSData *data = [NSData dataWithContentsOfURL:location];
@@ -94,6 +118,36 @@
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        //        [self.progressView setProgress:progress];
 //    });
+}
+
+// and here is the method for handling the response if it is an error
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(error){
+            UIAlertView *anError;
+            anError = [[UIAlertView alloc]
+                       initWithTitle:@"Web Error"
+                       message: [error localizedDescription]
+                       delegate: self
+                       cancelButtonTitle:@"OK"
+                       otherButtonTitles:nil ] ;
+            anError.tag = 200;
+            [anError show];
+            return;
+        }else{
+            //  the data was received in URLSession:dataTask:didReceiveData:
+            //  the task has now ended, handle the response based on the received data
+        }
+    });
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == 200)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:nil];
+    }
+    
 }
 
 @end

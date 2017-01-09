@@ -68,9 +68,9 @@
 
 -(Boolean)deleteAllScores;
 -(NSMutableArray*)getAllScores;
--(NSMutableArray*)getScoreForFactor1:(int)factor1 andFactor2:(int)factor2 countIteration:(int)countIter lives:(int)lives BPM:(int)BPM andGameType:(NSString*)gameTypeStr;
+-(NSMutableArray*)getScoreForFactor1:(int)factor1 andFactor2:(int)factor2 andGameType:(NSString*)gameTypeStr;
 
--(Boolean)updateScore:(int)score ForFactor1:(int)factor1 andFactor2:(int)factor2 countIteration:(int)countIter lives:(int)lives BPM:(int)BPM andGameType:(NSString*)gameTypeStr;
+-(Boolean)updateScore:(int)score ForFactor1:(int)factor1 andFactor2:(int)factor2 andGameType:(NSString*)gameTypeStr;
 
 
 @end

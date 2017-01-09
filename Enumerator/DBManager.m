@@ -380,18 +380,6 @@ typedef enum
     }
     sqlite3_finalize(statement);
     return success;
-    
-    const char *stmt = "select id, name from table1 where isImage = 1";
-    sqlite3_stmt *selectstmt;
-    if (sqlite3_prepare_v2(database, stmt, -1, &selectstmt, NULL) == SQLITE_OK) {
-        while(sqlite3_step(selectstmt) == SQLITE_ROW) {
-            int rowid = sqlite3_column_int(selectstmt, 0);
-            NSString * name = [NSString stringWithUTF8String:(char *)sqlite3_column_text(selectstmt, 1)];
-            
-        }
-    }
-    
-    
 }
 
 
@@ -467,23 +455,23 @@ typedef enum
 
 -(NSMutableArray*)getAllScores
 {
-    NSString *sql = @"SELECT * FROM HighScores ORDER BY factor1 AND factor2 AND score DESC";
+    NSString *sql = @"SELECT * FROM HighScores ORDER BY factor1 AND factor2";
     NSMutableArray* results = [self executeQueryForAllColumns:sql];
     
     return results;
 }
 
--(NSMutableArray*)getScoreForFactor1:(int)factor1 andFactor2:(int)factor2 countIteration:(int)countIter lives:(int)lives BPM:(int)BPM andGameType:(NSString*)gameTypeStr
+-(NSMutableArray*)getScoreForFactor1:(int)factor1 andFactor2:(int)factor2 andGameType:(NSString*)gameTypeStr
 {
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM HighScores WHERE factor1 = '%d' AND factor2 = '%d' AND countIteration = '%d' AND lives = '%d' and BPM = '%d' AND gameType = '%@'", factor1,factor2,countIter,lives,BPM,gameTypeStr];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM HighScores WHERE factor1 = '%d' AND factor2 = '%d' AND gameType = '%@'", factor1,factor2,gameTypeStr];
     NSMutableArray* results = [self executeQuery:sql forReturnOf:dbCol_score];
     NSLog(@"%@",sql);
     return results;
 }
 
--(Boolean)updateScore:(int)score ForFactor1:(int)factor1 andFactor2:(int)factor2 countIteration:(int)countIter lives:(int)lives BPM:(int)BPM andGameType:(NSString*)gameTypeStr
+-(Boolean)updateScore:(int)score ForFactor1:(int)factor1 andFactor2:(int)factor2 andGameType:(NSString*)gameTypeStr
 {
-    NSString *sql = [NSString stringWithFormat:@"UPDATE HighScores SET score = '%d' WHERE factor1 = '%d' AND factor2 = '%d' AND countIteration = '%d' AND lives = '%d' AND BPM = '%d' AND gameType = '%@'", score, factor1,factor2,countIter,lives,BPM,gameTypeStr];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE HighScores SET score = '%d' WHERE factor1 = '%d' AND factor2 = '%d'AND gameType = '%@'", score, factor1,factor2,gameTypeStr];
     NSLog(@"update: %@",sql);
     
     return [self executeQuery:sql];

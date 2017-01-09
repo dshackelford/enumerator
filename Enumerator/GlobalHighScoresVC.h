@@ -23,6 +23,8 @@
     UIView* loadingView;
     UIActivityIndicatorView* actInd;
     
+    NSDictionary* prefDict;
+    
 }
 
 -(void)grabHighScores;

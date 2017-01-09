@@ -352,7 +352,17 @@
     
     //USERNAME SAVE
     UsernameCell* usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [dict setObject:usrnameCell.usernameTextField.text forKey:kUserName];
+    
+    NSString* oldUsername = [prefDict objectForKey:kUserName];
+    NSString* newUsername = usrnameCell.usernameTextField.text;
+    
+    if(![oldUsername isEqualToString:newUsername])
+    {
+        HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
+        [hsHandler updateUsernameChange:oldUsername toNewUsername:usrnameCell.usernameTextField.text];
+    }
+    
+    [dict setObject:newUsername forKey:kUserName];
     
     //COUNT ITER SAVE
     usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
@@ -363,6 +373,8 @@
     [dict setObject:usrnameCell.usernameTextField.text forKey:kNumOfLives];
     
     [dict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
+    
+    
     
 }
 

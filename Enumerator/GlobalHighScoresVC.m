@@ -26,20 +26,30 @@
     tableData = [[NSMutableArray alloc] init];
     HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
     [hsHandler getAllScores];
+    
+    prefDict = [AppUtilities getPreferences];
+    
     [self addLoadingScreen];
     
 }
 
 -(void)didGetData:(NSNotification*)notification
 {
-    NSLog(@"Got data");
-    HighScoreDataHandler* hsHandler = notification.object;
-    NSLog(@"%@",hsHandler.dataArray);
-    
-    [self processDataIntoTableFormat:hsHandler.dataArray];
-    
-    [self removeLoadingScreen];
-    [self.tableView reloadData];
+    if(notification.object != nil)
+    {
+        NSLog(@"Got data");
+        HighScoreDataHandler* hsHandler = notification.object;
+        NSLog(@"%@",hsHandler.dataArray);
+        
+        [self processDataIntoTableFormat:hsHandler.dataArray];
+        
+        [self removeLoadingScreen];
+        [self.tableView reloadData];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"showHighScoresTable" sender:self];
+    }
 }
 
 -(void)processDataIntoTableFormat:(NSArray*)dataArrayInit
@@ -52,11 +62,9 @@
         NSDictionary* userDictI = [dataArrayInit objectAtIndex:i];
         NSMutableArray* sectionRowDicts = [[NSMutableArray alloc]init];
         NSString* factorsI = [NSString stringWithFormat:@"%@%@",[userDictI objectForKey:@"factor1"],[userDictI objectForKey:@"factor2"]];
-//        NSLog(@"i = %d",i);
         
         for(int j = i; j < [dataArrayInit count]; j = j + 1)
         {
-//            NSLog(@"j = %d",i);
             NSDictionary* userDictJ = [dataArrayInit objectAtIndex:j];
             NSString* factorsJ = [NSString stringWithFormat:@"%@%@",[userDictJ objectForKey:@"factor1"],[userDictJ objectForKey:@"factor2"]];
             
@@ -114,7 +122,14 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //need to figure out how many scores in this section, not some static number
-    return [[tableData objectAtIndex:section] count];
+    if([[tableData objectAtIndex:section] count] < 10)
+    {
+        return [[tableData objectAtIndex:section] count];
+    }
+    else
+    {
+        return 10;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -144,17 +159,28 @@
 {
     NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",(int)indexPath.row + 1,[userDict objectForKey:@"username"]];
+    NSString* username = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
+    NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",(int)indexPath.row + 1,username];
+    
+    
     NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
     
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
     cell.textLabel.text = usernameStr;
+    
     
     UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
     accLabel.text = scoreStr;
     
     [cell addSubview:accLabel];
     [cell setAccessoryView:accLabel];
+    
+    if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+    {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
+        accLabel.font = [UIFont boldSystemFontOfSize:20];
+        
+    }
     
     return cell;
 }

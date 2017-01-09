@@ -12,6 +12,7 @@
 #import "BPMCell.h"
 #import "SubFactorsView.h"
 #import "UsernameCell.h"
+#import "HighScoreDataHandler.h"
 
 @interface SettingsVC : UITableViewController <UIPickerViewDelegate ,UIPickerViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
 {

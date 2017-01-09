@@ -118,7 +118,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="settingsCell" tableViewCell="7X7-of-5K9" id="bp7-61-lZf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -179,7 +179,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZgB-GK-GTh" id="VSu-MV-NHF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -223,7 +223,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lSG-AI-HTL" id="CQj-OC-dMH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -233,10 +233,13 @@
                             <outlet property="delegate" destination="1mw-a3-Xu2" id="pd5-wh-jKD"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="vNw-h9-SMQ" kind="show" identifier="showHighScoresTable" id="Z64-Oe-PZZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z24-oa-Rsj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1424" y="1613"/>
+            <point key="canvasLocation" x="1254" y="1695"/>
         </scene>
         <!--User High ScoresVC-->
         <scene sceneID="3Re-Fu-ivx">
@@ -251,7 +254,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LqP-2u-vRn" id="Wcd-U8-ckW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -349,7 +352,7 @@
                     <connections>
                         <outlet property="backButton" destination="t7e-2A-T6K" id="diJ-go-NBA"/>
                         <outlet property="homeButton" destination="bGc-ow-eEE" id="WUE-50-bes"/>
-                        <outlet property="restartButton" destination="6TP-4P-n8k" id="cd5-OI-aSb"/>
+                        <outlet property="restartButton" destination="6TP-4P-n8k" id="1ya-L3-Skj"/>
                         <outlet property="settingsButton" destination="F7M-kX-Ag5" id="IAZ-W3-Crt"/>
                     </connections>
                 </viewController>
@@ -359,8 +362,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bq4-mO-gJ5"/>
         <segue reference="Sg5-kA-AWa"/>
+        <segue reference="Z64-Oe-PZZ"/>
         <segue reference="vEi-e5-7HW"/>
+        <segue reference="xge-kL-N0o"/>
     </inferredMetricsTieBreakers>
 </document>
