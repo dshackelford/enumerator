@@ -30,6 +30,13 @@
         [self startSessionWithURL:@"http://dshacktech.com/enumerator/getAllScores.php"];
 }
 
+-(void)getTopScores
+{
+    //assuming the user has already added a personal username
+    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getTopScores.php?username=%@",username]];
+}
+
 -(void)postAHighScore:(int)score
 {
     NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
@@ -88,6 +95,7 @@
     NSLog(@"%@",urlInit);
     
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    sessionConfiguration.timeoutIntervalForRequest = 30; //30 second timeout interval
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:[NSURL URLWithString:urlInit]];
     [downloadTask resume];

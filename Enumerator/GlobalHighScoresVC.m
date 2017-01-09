@@ -26,6 +26,7 @@
     tableData = [[NSMutableArray alloc] init];
     HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
     [hsHandler getAllScores];
+//    [hsHandler getTopScores];
     
     prefDict = [AppUtilities getPreferences];
     
@@ -42,7 +43,7 @@
         NSLog(@"%@",hsHandler.dataArray);
         
         [self processDataIntoTableFormat:hsHandler.dataArray];
-        
+        [self findUserRanks];
         [self removeLoadingScreen];
         [self.tableView reloadData];
     }
@@ -88,7 +89,33 @@
         NSLog(@"%@",sectionRowDicts);
         [tableData addObject:sectionRowDicts]; //all the rows for one section in an array
     }
+}
 
+-(void)findUserRanks
+{
+    NSString* username = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kUserName]];
+    userRanks = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [tableData count]; i = i +1) //each section
+    {
+        NSArray* sectionArr = [tableData objectAtIndex:i];
+        int userScore = 0;
+        int rank = 0;
+        
+        //get the user's scores
+        for(NSDictionary* rowDict in sectionArr)
+        {
+            rank = rank + 1;
+            NSString* rowUsername = [NSString stringWithFormat:@"%@",[rowDict valueForKey:@"username"]];
+            if([username isEqualToString:rowUsername])
+            {
+                userScore = [[rowDict objectForKey:@"score"]intValue];
+                break;
+            }
+        }
+        [userRanks addObject:[NSNumber numberWithInt:rank]];
+    }
+    
+    //if the user ranks as a number greater then 9, then we need to add it, should be the same length as the sectionNames array
 }
 
 -(void)addLoadingScreen
@@ -157,32 +184,69 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    
-    NSString* username = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
-    NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",(int)indexPath.row + 1,username];
-    
-    
-    NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
-    
-    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
-    cell.textLabel.text = usernameStr;
-    
-    
-    UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
-    accLabel.text = scoreStr;
-    
-    [cell addSubview:accLabel];
-    [cell setAccessoryView:accLabel];
-    
-    if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+    //i am only showing top ten scores, and if the users score is outside the top ten, i'll add it to the 10th spot
+    if(indexPath.row == 9 && [[userRanks objectAtIndex:indexPath.section] intValue] > 10)
     {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
-        accLabel.font = [UIFont boldSystemFontOfSize:20];
+        int index = [[userRanks objectAtIndex:indexPath.section] intValue];
+        int sectino = indexPath.section;
         
+        NSArray* arr = [tableData objectAtIndex:indexPath.section];
+        NSDictionary* dict = [arr objectAtIndex:index-1];
+        //our user is outside the top ten, so add it to the tenth spot, and we are in the tenth spot!
+        NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:index-1];
+        
+        NSString* username = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
+        NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",[[userRanks objectAtIndex:indexPath.section] intValue],username];
+        
+        NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
+        
+        UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
+        cell.textLabel.text = usernameStr;
+        
+        
+        UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
+        accLabel.text = scoreStr;
+        
+        [cell addSubview:accLabel];
+        [cell setAccessoryView:accLabel];
+        
+        if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+        {
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
+            accLabel.font = [UIFont boldSystemFontOfSize:20];
+        }
+        
+        return cell;
+    }
+    else
+    {
+        NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSString* username = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"username"]];
+        NSString* usernameStr = [NSString stringWithFormat:@"%d. %@",(int)indexPath.row + 1,username];
+        
+        NSString* scoreStr = [NSString stringWithFormat:@"%@",[userDict objectForKey:@"score"]];
+        
+        UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
+        cell.textLabel.text = usernameStr;
+        
+        
+        UILabel* accLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 40)];
+        accLabel.text = scoreStr;
+        
+        [cell addSubview:accLabel];
+        [cell setAccessoryView:accLabel];
+        
+        if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+        {
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
+            accLabel.font = [UIFont boldSystemFontOfSize:20];
+        }
+        
+        return cell;
     }
     
-    return cell;
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated

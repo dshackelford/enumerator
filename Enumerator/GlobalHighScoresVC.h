@@ -18,6 +18,7 @@
     NSMutableArray* tableData;
     NSMutableArray* sectionNames;
     NSMutableArray* sectionCount;
+    NSMutableArray* userRanks;
     CGSize screenSize;
     
     UIView* loadingView;

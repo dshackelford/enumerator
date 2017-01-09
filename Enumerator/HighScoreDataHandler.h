@@ -13,7 +13,6 @@
 
 @interface HighScoreDataHandler : NSObject <NSURLSessionDelegate,NSURLSessionDownloadDelegate, UIAlertViewDelegate>
 
-@property NSDictionary* dataDict;
 @property NSArray* dataArray;
 
 
@@ -21,6 +20,7 @@
 -(void)getAllScoresByFactors;
 -(void)getAllUserScores;
 -(void)getAllScores;
+-(void)getTopScores;
 -(void)getScoresForBPM:(NSString*)bpm;
 -(void)postAHighScore:(int)score;
 -(void)updateUsernameChange:(NSString*)oldUsername toNewUsername:(NSString*)newUsername;
