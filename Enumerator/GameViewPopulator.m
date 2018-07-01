@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "GameViewPopulator.h"
+#import "GameVC.h"
 
 @implementation GameViewPopulator
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit
 {
     self = [super init];
     
@@ -73,7 +74,7 @@
     infoView.layer.borderWidth = 3;
     
     UITextView* infoTextView = [[UITextView alloc] initWithFrame:CGRectMake(widthInfo - 200,-3,200,heightInfo)];//200 are the width and height of the text box
-    infoTextView.text = [NSString stringWithFormat:@"Beats/min: %@ \nHigh Score: %d",[prefDict objectForKey:kBeatsPerMinute],highScore];
+    infoTextView.text = [NSString stringWithFormat:@"Beats/min: %@ \nHigh Score: %d",[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute],highScore];
     infoTextView.backgroundColor = [UIColor clearColor];
     infoTextView.textAlignment = NSTextAlignmentRight;
     infoTextView.editable = NO;
@@ -182,7 +183,7 @@
     scoreView.backgroundColor = [UIColor whiteColor];
     
     UITextView* scoreTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, scoreView.frame.size.width - 2*10,200 - 2*10)];
-    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %d",[prefDict objectForKey:kFactor1],[prefDict objectForKey:kFactor2],[prefDict objectForKey:kBeatsPerMinute],score,currentHighScore];
+    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %d",[prefDict objectForKey:kFactor1],[prefDict objectForKey:kFactor2],[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute],score,currentHighScore];
     scoreTextView.font = [UIFont systemFontOfSize:25];
     scoreTextView.backgroundColor = [UIColor clearColor];
     

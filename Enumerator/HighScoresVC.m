@@ -67,35 +67,38 @@
     }
     else if (self.selectedRow == 1)
     {
-        [self performSegueWithIdentifier:@"showGlobalHighScoresVC" sender:self];
+        NSString* username = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] valueForKey:kUserName]];
+        if([username isEqualToString:@"username"])
+        {
+            
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Update Username" message:@"To be a part of the Global High Scores Table, you need to update your \"username\" in the Settings, or in the text field below." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.keyboardType = UIKeyboardTypeDefault;
+                textField.text = @"username";
+            }];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UITextField *textField = [alert.textFields objectAtIndex:0];
+                NSString *title = textField.text;
+                
+                NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithDictionary:[AppUtilities getPreferences]];
+                [dict setValue:title forKey:kUserName];
+                
+                [dict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
+            }]];
+            
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }
+        else
+        {
+            [self performSegueWithIdentifier:@"showGlobalHighScoresVC" sender:self];
+        }
     }
 }
-
-////use this for passing information to the new view controller
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    //segmented control settings
-//    if ([segue.identifier isEqualToString:@"showUserHighScoresVC"])
-//    {
-//        UserHighScoresVC *destViewController = segue.destinationViewController;
-//        
-////        [destViewController setTableData:[[NSMutableArray alloc] initWithArray:@[@"Height",@"Speed"]]];
-////        NSMutableArray* segArray = [[NSMutableArray alloc] initWithArray:@[@[@"MPH",@"Kts"],@[@"ft",@"m"]]];
-////        
-////        [destViewController setSegControlArrays:segArray];
-//        
-////        NSString* title = [[tableData objectAtIndex:self.selectedSection] objectAtIndex:self.selectedRow];
-////        NSLog(@"%@",title);
-////        [destViewController setTitle:title];
-//    }
-//    else if([segue.identifier isEqualToString:@"showGlobalHighScoresVC"])
-//    {
-//        GlobalHighScoresVC *destViewController = segue.destinationViewController;
-//        //                NSMutableArray* data = [[NSMutableArray alloc] initWithArray:@[@"Sunset Red",@"Seagrass Green",@"Ocean Blue",@"Sand Tan",@"Dawnpatrol Grey",]];
-//        //            [destViewController setTableData:data];
-////        [destViewController setTitle:@"Color Scheme"];
-//        
-//    }
-//}
 
 @end

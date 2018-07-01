@@ -1,0 +1,17 @@
+.DS_Store
+Enumerator/.DS_Store
+
+pods/
+
+Podfile.lock
+
+Enumerator .xcodeproj/xcuserdata/Dshack.xcuserdatad/*
+
+Enumerator.xcodeproj/xcuserdata/
+
+Enumerator.xcworkspace/xcuserdata/*
+
+Enumerator.xcodeproj/project.xcworkspace/xcuserdata/
+
+Enumerator.xcodeproj/xcuserdata/Dshack.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+

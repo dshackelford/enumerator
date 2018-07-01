@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BPMCell.h"
+#import "AppUtilities.h"
 
 @implementation BPMCell
 
@@ -22,6 +23,7 @@
 //    _slider.minimumValue = 0;
 //    _slid
 //    [_slider setFrame:CGRectMake(0, 0, 150, 20)];
+
     
     _bpmCount.textAlignment = NSTextAlignmentCenter;
     return self;
@@ -38,11 +40,13 @@
 {
     self.bpmCount.text = [NSString stringWithFormat:@"%.f",_slider.value];
     
-//    NSLog(@"new value %f",_slider.value);
+    NSInteger bpm = [self.bpmCount.text integerValue];
+    NSLog(@"bpm saved as %ld",(long)bpm);
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:bpm] forKey:kBeatsPerMinute];
 }
 
 -(IBAction)editingDidEnd:(id)sender
 {
-//    NSLog(@"set value %f",_slider.value);
+    NSLog(@"set value %f",_slider.value);
 }
 @end

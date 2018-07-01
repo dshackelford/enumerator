@@ -44,7 +44,7 @@
     NSString* f2 = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] objectForKey:kFactor2]];
     int countIter = [[[AppUtilities getPreferences] objectForKey:kCountIteration] intValue];
     int lives = [[[AppUtilities getPreferences] objectForKey:kNumOfLives] intValue];
-    int bpm = [[[AppUtilities getPreferences] objectForKey:kBeatsPerMinute] intValue];
+    int bpm = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] intValue];
     
     NSString* gameType = @"custom"; //need to keep this in the local settigns file??
     
@@ -131,7 +131,14 @@
 // and here is the method for handling the response if it is an error
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(error){
+        if(error)
+        {
+            
+//            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Web Error" message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:nil];
+//            }]];
+            
             UIAlertView *anError;
             anError = [[UIAlertView alloc]
                        initWithTitle:@"Web Error"

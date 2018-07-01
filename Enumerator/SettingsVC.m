@@ -152,14 +152,10 @@
             
             cell.slider.tag = indexPath.row;
             
-            [cell.slider addTarget:self action:@selector(sliderValueChanged) forControlEvents:UIControlEventTouchCancel];
-            
-            [cell.slider addTarget:self action:@selector(editingDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
-            
-            cell.slider.value = [[prefDict objectForKey:kBeatsPerMinute] intValue];
+            cell.slider.value = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] intValue];
             cell.slider.maximumValue = 150;
             cell.slider.minimumValue = 10;
-            cell.bpmCount.text = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kBeatsPerMinute]];
+            cell.bpmCount.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute]];
             cell.bpmCount.font = [UIFont systemFontOfSize:20];
             return cell;
         }
@@ -225,12 +221,6 @@
 }
 
 
--(void)sliderValueChanged
-{
-    NSLog(@"2hadf");
-}
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -269,14 +259,14 @@
     
 //     Animate it moving up
     [UIView animateWithDuration:.3 animations:^{
-        [_picker setCenter:CGPointMake(screenSize.width/2, screenSize.height - self.picker.frame.size.height/2)]; //148 seems to put it in place just right.
+        [self.picker setCenter:CGPointMake(self->screenSize.width/2, self->screenSize.height - self.picker.frame.size.height/2)]; //148 seems to put it in place just right.
     } completion:^(BOOL finished) {
         // When done, place an invisible button on the view behind the picker, so if the
         // user "taps to dismiss" the picker, it will go away. Good user experience!
         self.backgroundTapButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backgroundTapButton.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
-        [_backgroundTapButton addTarget:self action:@selector(backgroundTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view insertSubview:_backgroundTapButton belowSubview:self.picker];
+        self.backgroundTapButton.frame = CGRectMake(0, 0, self->screenSize.width, self->screenSize.height);
+        [self.backgroundTapButton addTarget:self action:@selector(backgroundTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view insertSubview:self.backgroundTapButton belowSubview:self.picker];
     }];
     
 }
@@ -286,9 +276,9 @@
 - (void)backgroundTapped:(id)sender {
     
     [UIView animateWithDuration:.3 animations:^{
-        _picker.center = CGPointMake(screenSize.width/2, screenSize.height + _picker.frame.size.height/2);
+        self.picker.center = CGPointMake(self->screenSize.width/2, self->screenSize.height + self.picker.frame.size.height/2);
     } completion:^(BOOL finished) {
-        [_picker removeFromSuperview];
+        [self.picker removeFromSuperview];
         self.picker = nil;
         [self.backgroundTapButton removeFromSuperview];
         self.backgroundTapButton = nil;
@@ -329,12 +319,6 @@
 
 }
 
--(void)dataChanged
-{
-    NSLog(@"got a change!");
-}
-
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -344,11 +328,6 @@
     SubFactorsView* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     [dict setObject:cell.factorLabel1.text forKey:kFactor1];
     [dict setObject:cell.factorLabel2.text forKey:kFactor2];
-    
-    
-    //BPM SAVE
-    BPMCell* bpmcell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    [dict setObject:bpmcell.bpmCount.text forKey:kBeatsPerMinute];
     
     //USERNAME SAVE
     UsernameCell* usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];

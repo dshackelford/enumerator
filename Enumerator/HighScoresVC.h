@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "GlobalHighScoresVC.h"
 #import "UserHighScoresVC.h"
+#import "AppUtilities.h"
 
 
 @interface HighScoresVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
@@ -18,6 +19,8 @@
     IBOutlet UIBarButtonItem* backButton;
     
     NSArray* tableData;
+    
+    NSString* newUsername;
     
 }
 

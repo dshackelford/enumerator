@@ -39,7 +39,7 @@
     factor2 = [[prefDict objectForKey:kFactor2] intValue];
 
     
-    double frequency = [[prefDict objectForKey:kBeatsPerMinute] doubleValue];
+    double frequency = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] doubleValue];
     period = 60/frequency;
     bpm = frequency;
     gameType = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kGameType]];
@@ -288,8 +288,12 @@
         [db addScore:count factor1:factor1 factor2:factor2 count:countIter lives:numOfLives BPM:bpm gameType:gameType];
         [db closeDatabase];
         
-        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-        [hsDataHandler postAHighScore:count];
+        //if the user has inputed a valid username then post it to the global highscores
+        if(![[NSString stringWithFormat:@"%@",[prefDict valueForKey:kUserName]] isEqualToString:@"username"])
+        {
+            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+            [hsDataHandler postAHighScore:count];
+        }
     }
     else if(count > currentHighScore)
     {
@@ -298,10 +302,14 @@
         [db updateScore:count ForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
         [db closeDatabase];
         
-        HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
-        [hsDataHandler postAHighScore:count];
+        //if the user has inputed a valid username then post it to the global highscores
+        if(![[NSString stringWithFormat:@"%@",[prefDict valueForKey:kUserName]] isEqualToString:@"username"])
+        {
+            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+            [hsDataHandler postAHighScore:count];
+        }
     }
-
+    
     
     int scored = [self findScore];
     NSLog(@"oldscore %d vs new %d",count, scored);

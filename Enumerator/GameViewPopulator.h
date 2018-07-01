@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "AppUtilities.h"
 
+@class GameVC;
+
 @interface GameViewPopulator : NSObject
 {
-    UIViewController* parentViewController;
+    GameVC* parentViewController;
     UIView* theView;
     CGSize screenSize;
     NSDictionary* prefDict;
@@ -58,7 +60,7 @@
     double heightScoreBox;
 }
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(UIViewController*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit;
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit;
 
 -(UIView*)makeInfoBarViewWithHighScore:(int)highScore;
 -(UILabel*)makeCountLabel;
