@@ -16,7 +16,6 @@
     GameVC* parentViewController;
     UIView* theView;
     CGSize screenSize;
-    NSDictionary* prefDict;
     UIButton* backButton;
     NSString* factorKey;
     
@@ -60,7 +59,7 @@
     double heightScoreBox;
 }
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit;
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC  behindBackButton:(UIButton*)backButtonInit;
 
 -(UIView*)makeInfoBarViewWithHighScore:(int)highScore;
 -(UILabel*)makeCountLabel;

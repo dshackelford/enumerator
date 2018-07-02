@@ -12,20 +12,24 @@
 
 @implementation BPMCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)init
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        //intialization code
-    }
-//    
-//    _slider.maximumValue = 1000;
-//    _slider.minimumValue = 0;
-//    _slid
-//    [_slider setFrame:CGRectMake(0, 0, 150, 20)];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"BPMCell" owner:self options:nil] lastObject];
 
+    self.textLabel.text = @"Beats Per Minute";
+    self.textLabel.textColor = [UIColor blackColor];
+    self.textLabel.font = [UIFont systemFontOfSize:20];
     
-    _bpmCount.textAlignment = NSTextAlignmentCenter;
+//    self.slider.tag = indexPath.row;
+    
+    self.slider.value = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] intValue];
+    self.slider.maximumValue = 150;
+    self.slider.minimumValue = 10;
+    
+    self.bpmCountLabel.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute]];
+    self.bpmCountLabel.font = [UIFont systemFontOfSize:20];
+    
+    self.bpmCountLabel.textAlignment = NSTextAlignmentCenter;
     return self;
 }
 
@@ -38,9 +42,9 @@
 
 -(IBAction)sliderChangedValue:(id)sender
 {
-    self.bpmCount.text = [NSString stringWithFormat:@"%.f",_slider.value];
+    self.bpmCountLabel.text = [NSString stringWithFormat:@"%.f",_slider.value];
     
-    NSInteger bpm = [self.bpmCount.text integerValue];
+    NSInteger bpm = [self.bpmCountLabel.text integerValue];
     NSLog(@"bpm saved as %ld",(long)bpm);
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:bpm] forKey:kBeatsPerMinute];
 }

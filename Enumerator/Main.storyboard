@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xSz-4O-XOW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xSz-4O-XOW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -135,14 +135,8 @@
                                 <segue destination="xSz-4O-XOW" kind="presentation" id="iPp-f4-kPQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="4tz-h7-jAA">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="7BS-ac-8Bt"/>
-                            </connections>
-                        </barButtonItem>
                         <connections>
                             <outlet property="leftBarButtonItem" destination="mpR-0V-FBg" id="FBG-yE-Mnf"/>
-                            <outlet property="rightBarButtonItem" destination="4tz-h7-jAA" id="c6g-W7-OpO"/>
                         </connections>
                     </navigationItem>
                 </tableViewController>
@@ -155,7 +149,7 @@
             <objects>
                 <navigationController id="M1G-gd-9p7" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LS3-P9-ALZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -274,7 +268,7 @@
             <objects>
                 <navigationController id="dTr-ws-xIf" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yBP-DA-SME">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -362,9 +356,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Sg5-kA-AWa"/>
         <segue reference="Z64-Oe-PZZ"/>
-        <segue reference="vEi-e5-7HW"/>
         <segue reference="xge-kL-N0o"/>
+        <segue reference="iPp-f4-kPQ"/>
     </inferredMetricsTieBreakers>
 </document>

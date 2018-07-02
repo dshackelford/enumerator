@@ -67,7 +67,7 @@
     }
     else if (self.selectedRow == 1)
     {
-        NSString* username = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] valueForKey:kUserName]];
+        NSString* username = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]];
         if([username isEqualToString:@"username"])
         {
             
@@ -82,10 +82,8 @@
                 UITextField *textField = [alert.textFields objectAtIndex:0];
                 NSString *title = textField.text;
                 
-                NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithDictionary:[AppUtilities getPreferences]];
-                [dict setValue:title forKey:kUserName];
                 
-                [dict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
+                [[NSUserDefaults standardUserDefaults] setObject:title forKey:kUserName];
             }]];
             
             

@@ -19,7 +19,7 @@
 -(void)getAllUserScores
 {
     //assuming the user has already added a personal username
-    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    NSString* username =[NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
     NSLog(@"%@",username);
     [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromUsername.php?username=%@",username]];
 }
@@ -33,17 +33,17 @@
 -(void)getTopScores
 {
     //assuming the user has already added a personal username
-    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    NSString* username =[NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
     [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getTopScores.php?username=%@",username]];
 }
 
 -(void)postAHighScore:(int)score
 {
-    NSString* username =[NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
-    NSString* f1 = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] objectForKey:kFactor1]];
-    NSString* f2 = [NSString stringWithFormat:@"%@",[[AppUtilities getPreferences] objectForKey:kFactor2]];
-    int countIter = [[[AppUtilities getPreferences] objectForKey:kCountIteration] intValue];
-    int lives = [[[AppUtilities getPreferences] objectForKey:kNumOfLives] intValue];
+    NSString* username =[NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
+    NSString* f1 = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1]];
+    NSString* f2 = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2]];
+    int countIter = [[[NSUserDefaults standardUserDefaults] objectForKey:kCountIteration] intValue];
+    int lives = [[[NSUserDefaults standardUserDefaults] objectForKey:kNumOfLives] intValue];
     int bpm = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] intValue];
     
     NSString* gameType = @"custom"; //need to keep this in the local settigns file??

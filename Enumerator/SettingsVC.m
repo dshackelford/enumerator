@@ -16,8 +16,6 @@
     NSLog(@"%@",[AppUtilities getPathToUserInfoFile]);
     
     screenSize = [UIScreen mainScreen].bounds.size;
-
-    prefDict = [AppUtilities getPreferences];
     
     tableNames= @[@"Username",@"Beats Per Minute",@"Factors",@"Count Iteration",@"Lives",@"Factor Switch"];
     
@@ -38,24 +36,11 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-    
-    playButton = [[UIBarButtonItem alloc] initWithTitle:@"Play" style:UIBarButtonItemStylePlain target:self action:nil];
-    self.navigationItem.rightBarButtonItem.title = @"Play";
     self.navigationItem.leftBarButtonItem.title = @"Done";
     
     _factorData = @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15"],@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15"]];
     
     _gameTypeNames = @[@"Adrenaline",@"Dyslexic",@"Crack Addict"];
-}
-
-//REMOVING THE KEYBOARD WHEN DONE EDITING
--(void) textFieldDidBeginEditing: (UITextField *) textField
-{
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DismissKeyboard:)]];
-}
--(void) DismissKeyboard:(UITapGestureRecognizer *) sender{
-    [self.view endEditing:YES];
-    [self.view removeGestureRecognizer:sender];
 }
 
 #pragma mark - UITableViewProtocols
@@ -118,46 +103,36 @@
         //USERNAME, Count iteration, or lives
         if(indexPath.row == 0 || indexPath.row == 3 || indexPath.row == 4)
         {
-            UsernameCell* cell = [[[NSBundle mainBundle] loadNibNamed:@"UsernameCell" owner:self options:nil] lastObject];
-            cell.textLabel.text = [tableNames objectAtIndex:indexPath.row];
-            cell.textLabel.font = [UIFont systemFontOfSize:20];
+            NSString* title = [tableNames objectAtIndex:indexPath.row];
             
             if (indexPath.row == 0) //username
             {
-                cell.usernameTextField.text = [prefDict objectForKey:kUserName];
+                self.usernameCell = [[TextFieldCell alloc] initWithPrefKey:kUserName andTitleLabel:title];
+                return self.usernameCell;
             }
             else if(indexPath.row == 3) //count iteration
             {
-                cell.usernameTextField.text = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kCountIteration]];
-                cell.usernameTextField.keyboardType = UIKeyboardTypeNumberPad;
+                
+                self.countIterationCell = [[NumberFieldCell alloc] initWithPrefKey:kCountIteration andTitleLabel:title];
+            
+                self.countIterationCell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                return self.countIterationCell;
             }
             else //lives number
             {
-                cell.usernameTextField.text = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kNumOfLives]];
-                cell.usernameTextField.keyboardType = UIKeyboardTypeNumberPad;
+                
+                self.numOfLivesCell = [[NumberFieldCell alloc] initWithPrefKey:kNumOfLives andTitleLabel:title];
+                
+                self.numOfLivesCell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                return  self.numOfLivesCell;
             }
-            
-            cell.usernameTextField.font = [UIFont systemFontOfSize:20];
-            cell.usernameTextField.delegate = self;
-            return cell;
         }
         //BEATS PER MINUTE SLIDER
         else if(indexPath.row == 1)
         {
-            BPMCell* cell = [[[NSBundle mainBundle] loadNibNamed:@"BPMCell" owner:self options:nil] lastObject];
-            //        cell.backgroundColor = [UIColor blueColor];
-            cell.textLabel.text = [tableNames objectAtIndex:indexPath.row];
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.textLabel.font = [UIFont systemFontOfSize:20];
+            self.bpmCell = [[BPMCell alloc] init];
             
-            cell.slider.tag = indexPath.row;
-            
-            cell.slider.value = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] intValue];
-            cell.slider.maximumValue = 150;
-            cell.slider.minimumValue = 10;
-            cell.bpmCount.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute]];
-            cell.bpmCount.font = [UIFont systemFontOfSize:20];
-            return cell;
+            return self.bpmCell;
         }
         //FACTORS
         else if(indexPath.row == 2)
@@ -168,8 +143,8 @@
             cell.textLabel.textColor = [UIColor blackColor];
             cell.textLabel.font = [UIFont systemFontOfSize:20];
             
-            cell.factorLabel1.text = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kFactor1]];
-            cell.factorLabel2.text = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kFactor2]];
+            cell.factorLabel1.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1]];
+            cell.factorLabel2.text = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2]];
             return cell;
         }
         else
@@ -249,13 +224,13 @@
     self.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, screenSize.height,screenSize.width , 0.4*screenSize.height)];
     self.picker.backgroundColor = [UIColor lightGrayColor];
 
-    _picker.dataSource = self;
-    _picker.delegate = self;
-    _picker.showsSelectionIndicator = YES;
-    [_picker selectRow:[[prefDict objectForKey:kFactor1] intValue] - 1 inComponent:0 animated:NO];
-    [_picker selectRow:[[prefDict objectForKey:kFactor2] intValue] - 1 inComponent:1 animated:NO];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    self.picker.showsSelectionIndicator = YES;
+    [self.picker selectRow:[[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1] intValue] - 1 inComponent:0 animated:NO];
+    [self.picker selectRow:[[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2] intValue] - 1 inComponent:1 animated:NO];
     
-    [self.view addSubview:_picker];
+    [self.view addSubview:self.picker];
     
 //     Animate it moving up
     [UIView animateWithDuration:.3 animations:^{
@@ -270,6 +245,8 @@
     }];
     
 }
+
+
 
 // And lastly, the method to hide the picker.  You should handle the picker changing
 // in a method with UIControlEventValueChanged on the pickerview.
@@ -311,50 +288,14 @@
     if(component == 0)
     {
         cell.factorLabel1.text = _factorData[component][row];
+        [[NSUserDefaults standardUserDefaults] setObject:cell.factorLabel1.text forKey:kFactor1];
     }
     else
     {
         cell.factorLabel2.text = _factorData[component][row];
+        [[NSUserDefaults standardUserDefaults] setObject:cell.factorLabel2.text forKey:kFactor2];
     }
 
-}
-
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithDictionary:prefDict];
-
-    //FACTORS SAVE
-    SubFactorsView* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    [dict setObject:cell.factorLabel1.text forKey:kFactor1];
-    [dict setObject:cell.factorLabel2.text forKey:kFactor2];
-    
-    //USERNAME SAVE
-    UsernameCell* usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    
-    NSString* oldUsername = [prefDict objectForKey:kUserName];
-    NSString* newUsername = usrnameCell.usernameTextField.text;
-    
-    if(![oldUsername isEqualToString:newUsername])
-    {
-        HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
-        [hsHandler updateUsernameChange:oldUsername toNewUsername:usrnameCell.usernameTextField.text];
-    }
-    
-    [dict setObject:newUsername forKey:kUserName];
-    
-    //COUNT ITER SAVE
-    usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    [dict setObject:usrnameCell.usernameTextField.text forKey:kCountIteration];
-    
-    //NUMBER OF LIVES SAVE
-    usrnameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-    [dict setObject:usrnameCell.usernameTextField.text forKey:kNumOfLives];
-    
-    [dict writeToFile:[AppUtilities getPathToUserInfoFile] atomically:YES];
-    
-    
-    
 }
 
 

@@ -18,6 +18,7 @@
 		6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */; };
 		6942C4B51E1F018A00C8DF1A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */; };
 		698666531E00CA9B00141882 /* HighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 698666521E00CA9B00141882 /* HighScoresVC.m */; };
+		69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69902AD920E9AADA00BC759D /* NumberFieldCell.m */; };
 		69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A45DCD1DFC858100273FFD /* BPMCell.xib */; };
 		69AC6F511DFB5F800066F6A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F501DFB5F800066F6A2 /* main.m */; };
 		69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F531DFB5F800066F6A2 /* AppDelegate.m */; };
@@ -30,8 +31,8 @@
 		69AC6F891DFB6C5E0066F6A2 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F881DFB6C5E0066F6A2 /* SettingsVC.m */; };
 		69AC6F911DFB86A50066F6A2 /* AppUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F901DFB86A50066F6A2 /* AppUtilities.m */; };
 		69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F991DFC81300066F6A2 /* BPMCell.m */; };
-		69FE7EB61E065CED00561BAC /* UsernameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE7EB51E065CED00561BAC /* UsernameCell.m */; };
-		69FE7EB81E065CF600561BAC /* UsernameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE7EB71E065CF600561BAC /* UsernameCell.xib */; };
+		69FE7EB61E065CED00561BAC /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE7EB51E065CED00561BAC /* TextFieldCell.m */; };
+		69FE7EB81E065CF600561BAC /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE7EB71E065CF600561BAC /* TextFieldCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		698666521E00CA9B00141882 /* HighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresVC.m; sourceTree = "<group>"; };
 		698666541E00CAA900141882 /* HighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighScoresVC.h; sourceTree = "<group>"; };
+		69902AD820E9AAC300BC759D /* NumberFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberFieldCell.h; sourceTree = "<group>"; };
+		69902AD920E9AADA00BC759D /* NumberFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumberFieldCell.m; sourceTree = "<group>"; };
 		69A45DCD1DFC858100273FFD /* BPMCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPMCell.xib; sourceTree = "<group>"; };
 		69AC6F4C1DFB5F800066F6A2 /* Enumerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enumerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69AC6F501DFB5F800066F6A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,9 +97,9 @@
 		69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtilities.h; sourceTree = "<group>"; };
 		69AC6F991DFC81300066F6A2 /* BPMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMCell.m; sourceTree = "<group>"; };
 		69AC6F9B1DFC81370066F6A2 /* BPMCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMCell.h; sourceTree = "<group>"; };
-		69FE7EB41E065CE400561BAC /* UsernameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernameCell.h; sourceTree = "<group>"; };
-		69FE7EB51E065CED00561BAC /* UsernameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsernameCell.m; sourceTree = "<group>"; };
-		69FE7EB71E065CF600561BAC /* UsernameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsernameCell.xib; sourceTree = "<group>"; };
+		69FE7EB41E065CE400561BAC /* TextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		69FE7EB51E065CED00561BAC /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		69FE7EB71E065CF600561BAC /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		69FE7EB91E07006D00561BAC /* SubFactorsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubFactorsView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,9 +243,11 @@
 				69FE7EB91E07006D00561BAC /* SubFactorsView.h */,
 				690C6DBC1E04FE0500F93A8C /* SubFactorsView.m */,
 				690C6DBA1E04FDF400F93A8C /* SubFactorsView.xib */,
-				69FE7EB41E065CE400561BAC /* UsernameCell.h */,
-				69FE7EB51E065CED00561BAC /* UsernameCell.m */,
-				69FE7EB71E065CF600561BAC /* UsernameCell.xib */,
+				69FE7EB41E065CE400561BAC /* TextFieldCell.h */,
+				69FE7EB51E065CED00561BAC /* TextFieldCell.m */,
+				69902AD820E9AAC300BC759D /* NumberFieldCell.h */,
+				69902AD920E9AADA00BC759D /* NumberFieldCell.m */,
+				69FE7EB71E065CF600561BAC /* TextFieldCell.xib */,
 				69AC6F9B1DFC81370066F6A2 /* BPMCell.h */,
 				69AC6F991DFC81300066F6A2 /* BPMCell.m */,
 				69A45DCD1DFC858100273FFD /* BPMCell.xib */,
@@ -358,7 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				690C6DBB1E04FDF400F93A8C /* SubFactorsView.xib in Resources */,
-				69FE7EB81E065CF600561BAC /* UsernameCell.xib in Resources */,
+				69FE7EB81E065CF600561BAC /* TextFieldCell.xib in Resources */,
 				69AC6F5F1DFB5F800066F6A2 /* LaunchScreen.storyboard in Resources */,
 				6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */,
 				69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */,
@@ -390,7 +395,7 @@
 				6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */,
 				69AC6F911DFB86A50066F6A2 /* AppUtilities.m in Sources */,
 				69AC6F571DFB5F800066F6A2 /* GameVC.m in Sources */,
-				69FE7EB61E065CED00561BAC /* UsernameCell.m in Sources */,
+				69FE7EB61E065CED00561BAC /* TextFieldCell.m in Sources */,
 				690AD8001E087B19000221AE /* GameViewPopulator.m in Sources */,
 				690C6DBD1E04FE0500F93A8C /* SubFactorsView.m in Sources */,
 				6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */,
@@ -400,6 +405,7 @@
 				6942C4B01E1EF55000C8DF1A /* DBManager.m in Sources */,
 				69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */,
 				6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */,
+				69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */,
 				6902AB0E1E0B48D20048DEC6 /* HighScoreDataHandler.m in Sources */,
 				69AC6F511DFB5F800066F6A2 /* main.m in Sources */,
 				69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */,

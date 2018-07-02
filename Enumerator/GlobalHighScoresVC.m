@@ -27,9 +27,7 @@
     HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
     [hsHandler getAllScores];
 //    [hsHandler getTopScores];
-    
-    prefDict = [AppUtilities getPreferences];
-    
+        
     [self addLoadingScreen];
     
 }
@@ -93,7 +91,7 @@
 
 -(void)findUserRanks
 {
-    NSString* username = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kUserName]];
+    NSString* username = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
     userRanks = [[NSMutableArray alloc] init];
     for(int i = 0; i < [tableData count]; i = i +1) //each section
     {
@@ -210,7 +208,7 @@
         [cell addSubview:accLabel];
         [cell setAccessoryView:accLabel];
         
-        if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+        if ([username isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]])
         {
             cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
             accLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -237,7 +235,7 @@
         [cell addSubview:accLabel];
         [cell setAccessoryView:accLabel];
         
-        if ([username isEqualToString:[prefDict objectForKey:kUserName]])
+        if ([username isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]])
         {
             cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
             accLabel.font = [UIFont boldSystemFontOfSize:20];

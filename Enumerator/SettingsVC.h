@@ -11,16 +11,15 @@
 
 #import "BPMCell.h"
 #import "SubFactorsView.h"
-#import "UsernameCell.h"
+#import "TextFieldCell.h"
+#import "NumberFieldCell.h"
 #import "HighScoreDataHandler.h"
 
-@interface SettingsVC : UITableViewController <UIPickerViewDelegate ,UIPickerViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
+@interface SettingsVC : UITableViewController <UIPickerViewDelegate ,UIPickerViewDataSource, UIGestureRecognizerDelegate>
 {
     NSArray* tableData;
     NSArray* tableNames;
-    
-    NSDictionary* prefDict;
-    
+        
     IBOutlet UIBarButtonItem* playButton;
     IBOutlet UIBarButtonItem* backButton;
     
@@ -32,6 +31,13 @@
 @property NSArray* factorData;
 @property NSArray* gameTypeNames;
 @property UIButton* backgroundTapButton;
+
+@property TextFieldCell* usernameCell;
+@property NumberFieldCell* countIterationCell;
+@property NumberFieldCell* numOfLivesCell;
+
+@property BPMCell* bpmCell;
+
 @property int tag;
 
 @end

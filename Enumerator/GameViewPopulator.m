@@ -12,14 +12,13 @@
 
 @implementation GameViewPopulator
 
--(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC withPrefDict:(NSDictionary*)prefDictInit behindBackButton:(UIButton*)backButtonInit
+-(id)initPopulatorToView:(UIView*)viewInit withScreenSize:(CGSize)screenSizeInit inViewController:(GameVC*)VC behindBackButton:(UIButton*)backButtonInit
 {
     self = [super init];
     
     parentViewController = VC;
     theView = viewInit;
     screenSize = screenSizeInit;
-    prefDict = prefDictInit;
     backButton = backButtonInit;
     
     //Info Bar view
@@ -102,7 +101,7 @@
 -(NSMutableArray*)makeFactorButtons:(int)howMany
 {
     UIButton* factorButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [factorButton1 setTitle:[NSString stringWithFormat:@"%@",[prefDict objectForKey:kFactor1]] forState:UIControlStateNormal];
+    [factorButton1 setTitle:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1]] forState:UIControlStateNormal];
     [factorButton1 addTarget:parentViewController action:@selector(didPressFactorButton1) forControlEvents:UIControlEventTouchUpInside];
     factorButton1.frame = CGRectMake(xFactor1,yFactor1,widthFactor1,heightFactor1);
     factorButton1.titleLabel.font = [UIFont boldSystemFontOfSize:55];
@@ -111,7 +110,7 @@
     factorButton1.layer.borderWidth = 3;
     
     UIButton* factorButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [factorButton2 setTitle:[NSString stringWithFormat:@"%@",[prefDict objectForKey:kFactor2]] forState:UIControlStateNormal];
+    [factorButton2 setTitle:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2]] forState:UIControlStateNormal];
     [factorButton2 addTarget:parentViewController action:@selector(didPressFactorButton2) forControlEvents:UIControlEventTouchUpInside];
     factorButton2.frame = CGRectMake(xFactor2,yFactor2,widthFactor2,heightFactor2);
     factorButton2.titleLabel.font = [UIFont boldSystemFontOfSize:55];
@@ -183,7 +182,7 @@
     scoreView.backgroundColor = [UIColor whiteColor];
     
     UITextView* scoreTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, scoreView.frame.size.width - 2*10,200 - 2*10)];
-    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %d",[prefDict objectForKey:kFactor1],[prefDict objectForKey:kFactor2],[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute],score,currentHighScore];
+    scoreTextView.text = [NSString stringWithFormat:@"%@:%@ at %@BPM\nScore: %d\nHigh: %d",[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1],[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2],[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute],score,currentHighScore];
     scoreTextView.font = [UIFont systemFontOfSize:25];
     scoreTextView.backgroundColor = [UIColor clearColor];
     

@@ -11,7 +11,7 @@
 @interface BPMCell : UITableViewCell
 
 @property IBOutlet UILabel* titleLabel;
-@property IBOutlet UILabel* bpmCount;
+@property IBOutlet UILabel* bpmCountLabel;
 @property IBOutlet UISlider* slider;
 
 -(IBAction)sliderChangedValue:(id)sender;

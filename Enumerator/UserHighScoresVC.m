@@ -34,7 +34,7 @@ typedef enum
     
     [super viewDidLoad];
     screenSize = [UIScreen mainScreen].bounds.size;
-    self.navigationItem.title = [NSString stringWithFormat: @"%@",[[AppUtilities getPreferences] objectForKey:kUserName]];
+    self.navigationItem.title = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
     backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:nil];
     self.navigationItem.leftBarButtonItem.title = @"Done";
     

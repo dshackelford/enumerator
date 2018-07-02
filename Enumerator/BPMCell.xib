@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="390" height="151.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="5gb-mS-Da6">
-                        <rect key="frame" x="259" y="91" width="118" height="31"/>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="5gb-mS-Da6">
+                        <rect key="frame" x="244" y="101" width="118" height="31"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="114" id="4Et-ng-v4d"/>
                             <constraint firstAttribute="height" constant="30" id="lFX-nI-Vq7"/>
@@ -30,8 +30,8 @@
                             <action selector="sliderChangedValue:" destination="oME-J7-cXf" eventType="valueChanged" id="ye8-uR-zcv"/>
                         </connections>
                     </slider>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCs-ol-CXo">
-                        <rect key="frame" x="285" y="37" width="67" height="34"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCs-ol-CXo">
+                        <rect key="frame" x="278" y="70.5" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="bpmCount" destination="YCs-ol-CXo" id="Q95-fz-hOq"/>
+                <outlet property="bpmCountLabel" destination="YCs-ol-CXo" id="ril-rW-yX4"/>
                 <outlet property="slider" destination="5gb-mS-Da6" id="9PL-m3-C42"/>
             </connections>
             <point key="canvasLocation" x="-210" y="61"/>

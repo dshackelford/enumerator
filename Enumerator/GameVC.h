@@ -49,7 +49,6 @@
     BOOL iter1Correct;
     BOOL iter2Correct;
     
-    NSDictionary* prefDict;
     NSMutableArray* metronome;
     NSTimer* metroTimer;
     

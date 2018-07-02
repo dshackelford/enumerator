@@ -28,21 +28,20 @@
 
     
     screenSize = [UIScreen mainScreen].bounds.size;
-    prefDict = [AppUtilities getPreferences];
     
     //GAME CONSTANTS
     beatCount = 0;
     fastFrameRate = 0.005;
-    numOfLives = [[prefDict objectForKey:kNumOfLives] intValue];
-    countIter = [[prefDict objectForKey:kCountIteration] intValue];
-    factor1 = [[prefDict objectForKey:kFactor1] intValue]; //base mutliples
-    factor2 = [[prefDict objectForKey:kFactor2] intValue];
+    numOfLives = [[[NSUserDefaults standardUserDefaults] objectForKey:kNumOfLives] intValue];
+    countIter = [[[NSUserDefaults standardUserDefaults] objectForKey:kCountIteration] intValue];
+    factor1 = [[[NSUserDefaults standardUserDefaults] objectForKey:kFactor1] intValue]; //base mutliples
+    factor2 = [[[NSUserDefaults standardUserDefaults] objectForKey:kFactor2] intValue];
 
     
     double frequency = [[[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute] doubleValue];
     period = 60/frequency;
     bpm = frequency;
-    gameType = [NSString stringWithFormat:@"%@",[prefDict objectForKey:kGameType]];
+    gameType = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kGameType]];
     
     [db openDatabase];
     
@@ -63,7 +62,7 @@
 
 -(void)addGameInterface
 {
-    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self withPrefDict:prefDict behindBackButton:backButton];
+    gamePopulator = [[GameViewPopulator alloc] initPopulatorToView:self.view withScreenSize:screenSize inViewController:self behindBackButton:backButton];
     
     //INFO BAR
     infoView = [gamePopulator makeInfoBarViewWithHighScore:currentHighScore];
@@ -289,7 +288,7 @@
         [db closeDatabase];
         
         //if the user has inputed a valid username then post it to the global highscores
-        if(![[NSString stringWithFormat:@"%@",[prefDict valueForKey:kUserName]] isEqualToString:@"username"])
+        if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])
         {
             HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
             [hsDataHandler postAHighScore:count];
@@ -303,7 +302,7 @@
         [db closeDatabase];
         
         //if the user has inputed a valid username then post it to the global highscores
-        if(![[NSString stringWithFormat:@"%@",[prefDict valueForKey:kUserName]] isEqualToString:@"username"])
+        if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])
         {
             HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
             [hsDataHandler postAHighScore:count];
