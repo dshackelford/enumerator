@@ -7,6 +7,7 @@
 //
 
 #import "GameVC.h"
+#import "DBHandler.h"
 
 @implementation GameVC
 
@@ -24,9 +25,6 @@
 {
     [super viewDidLoad];
     
-    db = [[DBManager alloc] init];
-
-    
     screenSize = [UIScreen mainScreen].bounds.size;
     
     //GAME CONSTANTS
@@ -43,17 +41,9 @@
     bpm = frequency;
     gameType = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kGameType]];
     
-    [db openDatabase];
     
-    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
-    
-    [db closeDatabase];
-    
-    if([dbArr count] > 0)
-    {
-        currentHighScore = [[dbArr objectAtIndex:0] intValue];
-        NSLog(@"current High Score%d",currentHighScore);
-    }
+    currentHighScore = [DBHandler getHighScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
+    NSLog(@"current High Score%d",currentHighScore);
     
     [self addGameInterface];
     
@@ -201,17 +191,7 @@
     [self resetLifeBar];
     [scoreView removeFromSuperview];
     
-    [db openDatabase];
-    
-    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
-    
-    [db closeDatabase];
-    
-    if([dbArr count] > 0)
-    {
-        currentHighScore = [[dbArr objectAtIndex:0] intValue];
-        NSLog(@"current High Score%d",currentHighScore);
-    }
+    currentHighScore = [DBHandler getHighScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
     
     [infoView removeFromSuperview];
     infoView = [gamePopulator makeInfoBarViewWithHighScore:currentHighScore];
@@ -273,19 +253,13 @@
     settingsButton.hidden = NO;
     homeButton.hidden = NO;
     
-    [db openDatabase];
-    
-    NSMutableArray* dbArr = [db getScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
-    
-    [db closeDatabase];
+    int currentHighScore = [DBHandler getHighScoreForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
     
     //alert user if high score is reached
-    if([dbArr count] == 0)
+    if(currentHighScore == 0)
     {
+        [DBHandler addScore:count forFactor1:factor1 andFactor2:factor2 withCount:countIter lives:numOfLives BPM:bpm andGameType:gameType];
         //check for username != 'username', throw up keyboard for username to post to global scores
-        [db openDatabase];
-        [db addScore:count factor1:factor1 factor2:factor2 count:countIter lives:numOfLives BPM:bpm gameType:gameType];
-        [db closeDatabase];
         
         //if the user has inputed a valid username then post it to the global highscores
         if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])
@@ -296,10 +270,8 @@
     }
     else if(count > currentHighScore)
     {
-        //check for username != 'username', throw up keyboard for username to post to global scores
-        [db openDatabase];
-        [db updateScore:count ForFactor1:factor1 andFactor2:factor2 andGameType:gameType];
-        [db closeDatabase];
+        
+        [DBHandler updateScore:count forFactor1:factor1 andFactor2:factor2 andGameType:gameType];
         
         //if the user has inputed a valid username then post it to the global highscores
         if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])

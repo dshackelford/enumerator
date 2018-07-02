@@ -15,9 +15,9 @@
 		6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */; };
 		6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */; };
 		6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6942C4A91E1C259400C8DF1A /* Main.storyboard */; };
-		6942C4B01E1EF55000C8DF1A /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4AD1E1EF55000C8DF1A /* DBManager.m */; };
 		6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */; };
 		6942C4B51E1F018A00C8DF1A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */; };
+		6952189320E9BA6500761775 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6952189220E9BA6500761775 /* DBHandler.m */; };
 		698666531E00CA9B00141882 /* HighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 698666521E00CA9B00141882 /* HighScoresVC.m */; };
 		69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69902AD920E9AADA00BC759D /* NumberFieldCell.m */; };
 		69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A45DCD1DFC858100273FFD /* BPMCell.xib */; };
@@ -73,11 +73,11 @@
 		6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHighScoresVC.m; sourceTree = "<group>"; };
 		6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserHighScoresVC.h; sourceTree = "<group>"; };
 		6942C4A91E1C259400C8DF1A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		6942C4AC1E1EF55000C8DF1A /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
-		6942C4AD1E1EF55000C8DF1A /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		6942C4AE1E1EF55000C8DF1A /* DBTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTableColumn.h; sourceTree = "<group>"; };
 		6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTableColumn.m; sourceTree = "<group>"; };
 		6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		6952189120E9BA5100761775 /* DBHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
+		6952189220E9BA6500761775 /* DBHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
 		698666521E00CA9B00141882 /* HighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresVC.m; sourceTree = "<group>"; };
 		698666541E00CAA900141882 /* HighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighScoresVC.h; sourceTree = "<group>"; };
 		69902AD820E9AAC300BC759D /* NumberFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberFieldCell.h; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 			children = (
 				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
 				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
-				6942C4AC1E1EF55000C8DF1A /* DBManager.h */,
-				6942C4AD1E1EF55000C8DF1A /* DBManager.m */,
+				6952189120E9BA5100761775 /* DBHandler.h */,
+				6952189220E9BA6500761775 /* DBHandler.m */,
 				6942C4AE1E1EF55000C8DF1A /* DBTableColumn.h */,
 				6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */,
 				6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */,
@@ -486,6 +486,7 @@
 			files = (
 				6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */,
 				69AC6F911DFB86A50066F6A2 /* AppUtilities.m in Sources */,
+				6952189320E9BA6500761775 /* DBHandler.m in Sources */,
 				69AC6F571DFB5F800066F6A2 /* GameVC.m in Sources */,
 				69FE7EB61E065CED00561BAC /* TextFieldCell.m in Sources */,
 				690AD8001E087B19000221AE /* GameViewPopulator.m in Sources */,
@@ -494,7 +495,6 @@
 				69AC6F891DFB6C5E0066F6A2 /* SettingsVC.m in Sources */,
 				69AC6F851DFB69710066F6A2 /* HomeVC.m in Sources */,
 				698666531E00CA9B00141882 /* HighScoresVC.m in Sources */,
-				6942C4B01E1EF55000C8DF1A /* DBManager.m in Sources */,
 				69AC6F541DFB5F800066F6A2 /* AppDelegate.m in Sources */,
 				6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */,
 				69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */,

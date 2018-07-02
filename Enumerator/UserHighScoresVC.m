@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "UserHighScoresVC.h"
+#import "DBHandler.h"
+#import "DBHandler.h"
 
 typedef enum
 {
@@ -25,16 +27,16 @@ typedef enum
 
 -(void)viewDidLoad
 {
-    db = [[DBManager alloc] init];
-    [db openDatabase];
-    
-    NSMutableArray* dbArray = [db getAllScores]; //gets the users scores;
+
+    NSMutableArray* dbArray = [DBHandler getAllUserScores]; //gets the users scores;
     tableData = [NSArray arrayWithArray:dbArray];
-    [db closeDatabase];
     
     [super viewDidLoad];
     screenSize = [UIScreen mainScreen].bounds.size;
-    self.navigationItem.title = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kUserName])
+    {
+            self.navigationItem.title = [NSString stringWithFormat: @"%@",[[NSUserDefaults standardUserDefaults] objectForKey:kUserName]];
+    }
     backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:nil];
     self.navigationItem.leftBarButtonItem.title = @"Done";
     

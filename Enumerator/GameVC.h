@@ -10,7 +10,7 @@
 #import "AppUtilities.h"
 #import "GameViewPopulator.h"
 #import "HighScoreDataHandler.h"
-#import "DBManager.h"
+//#import "DBManager.h"
 
 @interface GameVC : UIViewController
 {
@@ -34,7 +34,7 @@
     double period; //used for decimal calculation
         int bpm; //used for database
     int livesLeft;
-    int score;
+//    int score;
     NSString* gameType;
     
     CGSize screenSize;
@@ -58,9 +58,7 @@
     
     BOOL restart;
     UIVisualEffectView *blurEffectView;
-    GameViewPopulator* gamePopulator;
-    DBManager* db;
-    
+    GameViewPopulator* gamePopulator;    
 }
 -(void)updateCounter;
 

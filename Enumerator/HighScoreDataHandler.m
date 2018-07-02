@@ -27,7 +27,7 @@
 //will retrun an ordered array of dictionaries that are at most 9 long, with the 10th item being the users scores?
 -(void)getAllScores
 {
-        [self startSessionWithURL:@"http://dshacktech.com/enumerator/getAllScores.php"];
+    [self startSessionWithURL:@"http://dshacktech.com/enumerator/getAllScores.php"];
 }
 
 -(void)getTopScores

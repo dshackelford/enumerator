@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HomeVC.h"
 #import "GameVC.h"
+#import "DBHandler.h"
 
 @implementation HomeVC
 
@@ -16,10 +17,18 @@
 {
     [super viewDidLoad];
 
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
+    NSString *documentPath = [paths objectAtIndex:0];
+    NSLog(@"Documents Path: %@", documentPath);
+    
     if(![[NSUserDefaults standardUserDefaults] objectForKey:kBeatsPerMinute])
     {
         [self initializeDefaults];
     }
+    
+    [DBHandler createHighScoresDB];
+    
+    [DBHandler updateScore:999 forFactor1:2 andFactor2:3 andGameType:@"custom"];
     
 }
 
@@ -31,7 +40,13 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:1] forKey:kCountIteration];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:5] forKey:kNumOfLives];
 //    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:60] forKey:];
-//    [[NSUserDefaults standardUserDefaults] setObject:@"custom" forKey:kGameType];
+    [[NSUserDefaults standardUserDefaults] setObject:@"custom" forKey:kGameType];
+}
+
+
+-(void)initializeScoresDatabase
+{
+    
 }
 
 -(void)didPressPlayButton:(id)sender

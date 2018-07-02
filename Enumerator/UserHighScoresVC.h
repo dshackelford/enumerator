@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppUtilities.h"
 #import "HighScoreDataHandler.h"
-#import "DBManager.h"
+//#import "DBManager.h"
 
 @interface UserHighScoresVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -23,8 +23,6 @@
     UIActivityIndicatorView* actInd;
     
     NSDictionary* scoresDict;
-    
-    DBManager* db;
 }
 
 

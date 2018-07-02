@@ -186,10 +186,7 @@
     if(indexPath.row == 9 && [[userRanks objectAtIndex:indexPath.section] intValue] > 10)
     {
         int index = [[userRanks objectAtIndex:indexPath.section] intValue];
-        int sectino = indexPath.section;
         
-        NSArray* arr = [tableData objectAtIndex:indexPath.section];
-        NSDictionary* dict = [arr objectAtIndex:index-1];
         //our user is outside the top ten, so add it to the tenth spot, and we are in the tenth spot!
         NSDictionary* userDict = [[tableData objectAtIndex:indexPath.section] objectAtIndex:index-1];
         

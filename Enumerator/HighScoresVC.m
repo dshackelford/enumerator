@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "HighScoresVC.h"
 
-
 @implementation HighScoresVC
 
 -(void)viewDidLoad
