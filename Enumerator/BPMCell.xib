@@ -20,35 +20,69 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="5gb-mS-Da6">
-                        <rect key="frame" x="244" y="101" width="118" height="31"/>
+                        <rect key="frame" x="236" y="104" width="104" height="31"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="114" id="4Et-ng-v4d"/>
-                            <constraint firstAttribute="height" constant="30" id="lFX-nI-Vq7"/>
+                            <constraint firstAttribute="width" constant="100" id="Pc5-XB-ojj"/>
+                            <constraint firstAttribute="height" constant="30" id="p59-xf-OsF"/>
                         </constraints>
                         <connections>
                             <action selector="editingDidEnd:" destination="oME-J7-cXf" eventType="touchDragExit" id="4fN-ga-zd0"/>
                             <action selector="sliderChangedValue:" destination="oME-J7-cXf" eventType="valueChanged" id="ye8-uR-zcv"/>
                         </connections>
                     </slider>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCs-ol-CXo">
-                        <rect key="frame" x="278" y="70.5" width="42" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCs-ol-CXo">
+                        <rect key="frame" x="267" y="67" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRx-xJ-cWl">
+                        <rect key="frame" x="350" y="106.5" width="30" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="0fv-Y4-uSR"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="2bB-SU-XFj"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Tte-CI-qNa"/>
+                            <constraint firstAttribute="width" constant="30" id="vhe-l7-yQP"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="plusSign.png"/>
+                        <connections>
+                            <action selector="didPressPlusButton:" destination="oME-J7-cXf" eventType="touchUpInside" id="zKY-zh-ED4"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-ji-cAD">
+                        <rect key="frame" x="196" y="106" width="30" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="H9S-Uh-djV"/>
+                            <constraint firstAttribute="height" constant="25" id="R9N-vj-9FV"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="minusSign.png"/>
+                        <connections>
+                            <action selector="didPressMinusButton:" destination="oME-J7-cXf" eventType="touchUpInside" id="BSN-Qb-qSA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="5gb-mS-Da6" secondAttribute="trailing" constant="10" id="1yJ-Rj-XEt"/>
-                    <constraint firstItem="5gb-mS-Da6" firstAttribute="top" secondItem="YCs-ol-CXo" secondAttribute="bottom" constant="10" id="TAF-XJ-2CR"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="5gb-mS-Da6" secondAttribute="bottom" constant="10" id="byd-eM-tcS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="YCs-ol-CXo" secondAttribute="trailing" constant="50" id="uGH-wh-adP"/>
+                    <constraint firstItem="5gb-mS-Da6" firstAttribute="leading" secondItem="dBt-ji-cAD" secondAttribute="trailing" constant="12" id="48f-YS-KcP"/>
+                    <constraint firstItem="HRx-xJ-cWl" firstAttribute="centerY" secondItem="dBt-ji-cAD" secondAttribute="centerY" id="9IF-Mz-cjb"/>
+                    <constraint firstItem="5gb-mS-Da6" firstAttribute="top" secondItem="YCs-ol-CXo" secondAttribute="bottom" constant="16" id="Fak-Ve-BuP"/>
+                    <constraint firstItem="HRx-xJ-cWl" firstAttribute="leading" secondItem="5gb-mS-Da6" secondAttribute="trailing" constant="12" id="Gbj-Z6-Rx3"/>
+                    <constraint firstItem="YCs-ol-CXo" firstAttribute="centerX" secondItem="5gb-mS-Da6" secondAttribute="centerX" id="Yzr-Pz-J6v"/>
+                    <constraint firstItem="HRx-xJ-cWl" firstAttribute="trailing" secondItem="cn1-Zc-HzV" secondAttribute="trailingMargin" constant="10" id="f8t-yE-Qnh"/>
+                    <constraint firstItem="5gb-mS-Da6" firstAttribute="centerY" secondItem="dBt-ji-cAD" secondAttribute="centerY" id="gSm-Eq-Icw"/>
+                    <constraint firstAttribute="bottom" secondItem="HRx-xJ-cWl" secondAttribute="bottom" constant="20" id="rln-4g-xy8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bpmCountLabel" destination="YCs-ol-CXo" id="ril-rW-yX4"/>
+                <outlet property="minusButton" destination="dBt-ji-cAD" id="nbS-ZN-Xzz"/>
+                <outlet property="plusButton" destination="HRx-xJ-cWl" id="66a-3s-hAL"/>
                 <outlet property="slider" destination="5gb-mS-Da6" id="9PL-m3-C42"/>
             </connections>
             <point key="canvasLocation" x="-210" y="61"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="minusSign.png" width="225" height="225"/>
+        <image name="plusSign.png" width="506" height="512"/>
+    </resources>
 </document>

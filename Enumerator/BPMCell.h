@@ -14,6 +14,13 @@
 @property IBOutlet UILabel* bpmCountLabel;
 @property IBOutlet UISlider* slider;
 
+@property IBOutlet UIButton* plusButton;
+@property IBOutlet UIButton* minusButton;
+
 -(IBAction)sliderChangedValue:(id)sender;
 -(IBAction)editingDidEnd:(id)sender;
+
+-(IBAction)didPressPlusButton:(id)sender;
+-(IBAction)didPressMinusButton:(id)sender;
+
 @end

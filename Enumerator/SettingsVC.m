@@ -131,7 +131,7 @@
         else if(indexPath.row == 1)
         {
             self.bpmCell = [[BPMCell alloc] init];
-            
+        
             return self.bpmCell;
         }
         //FACTORS

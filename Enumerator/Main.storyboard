@@ -10,6 +10,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--How To Play-->
+        <scene sceneID="Obq-Gf-oEA">
+            <objects>
+                <tableViewController id="bRG-26-obL" customClass="HowToPlayVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zrc-Mq-C1A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="grO-5y-urq">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="grO-5y-urq" id="Sak-Ca-nAI">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bRG-26-obL" id="FIH-6t-B9a"/>
+                            <outlet property="delegate" destination="bRG-26-obL" id="3v8-Yt-AU6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="How To Play" id="0TW-W3-ZMM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="4EO-40-R2V">
+                            <connections>
+                                <segue destination="xSz-4O-XOW" kind="presentation" id="BGv-bT-NAw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZxP-pm-Lei" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1685" y="111"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MCe-Xr-en9">
+            <objects>
+                <navigationController id="ZV7-l4-9un" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yq9-aj-DH9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bRG-26-obL" kind="relationship" relationship="rootViewController" id="lEU-78-FA7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NlH-Gb-zYe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2637" y="111"/>
+        </scene>
         <!--HomeVC-->
         <scene sceneID="jGR-aw-k8I">
             <objects>
@@ -54,6 +105,9 @@
                                 <state key="normal" title="3. How To Play">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZV7-l4-9un" kind="presentation" id="4cJ-Hl-0rs"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ub3-Bh-5bk">
                                 <rect key="frame" x="127" y="294" width="121" height="78"/>
@@ -357,7 +411,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Z64-Oe-PZZ"/>
-        <segue reference="xge-kL-N0o"/>
-        <segue reference="iPp-f4-kPQ"/>
+        <segue reference="bq4-mO-gJ5"/>
+        <segue reference="BGv-bT-NAw"/>
     </inferredMetricsTieBreakers>
 </document>

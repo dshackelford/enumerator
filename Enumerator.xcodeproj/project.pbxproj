@@ -18,6 +18,9 @@
 		6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */; };
 		6942C4B51E1F018A00C8DF1A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */; };
 		6952189320E9BA6500761775 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6952189220E9BA6500761775 /* DBHandler.m */; };
+		6952189720F13AE500761775 /* HowToPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6952189620F13AE500761775 /* HowToPlayVC.m */; };
+		6952189B20F5A61900761775 /* minusSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 6952189920F5A61900761775 /* minusSign.png */; };
+		6952189C20F5A61900761775 /* plusSign.png in Resources */ = {isa = PBXBuildFile; fileRef = 6952189A20F5A61900761775 /* plusSign.png */; };
 		698666531E00CA9B00141882 /* HighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 698666521E00CA9B00141882 /* HighScoresVC.m */; };
 		69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69902AD920E9AADA00BC759D /* NumberFieldCell.m */; };
 		69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A45DCD1DFC858100273FFD /* BPMCell.xib */; };
@@ -78,6 +81,10 @@
 		6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		6952189120E9BA5100761775 /* DBHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
 		6952189220E9BA6500761775 /* DBHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
+		6952189520F13ADD00761775 /* HowToPlayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HowToPlayVC.h; sourceTree = "<group>"; };
+		6952189620F13AE500761775 /* HowToPlayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HowToPlayVC.m; sourceTree = "<group>"; };
+		6952189920F5A61900761775 /* minusSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minusSign.png; sourceTree = "<group>"; };
+		6952189A20F5A61900761775 /* plusSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusSign.png; sourceTree = "<group>"; };
 		698666521E00CA9B00141882 /* HighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoresVC.m; sourceTree = "<group>"; };
 		698666541E00CAA900141882 /* HighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighScoresVC.h; sourceTree = "<group>"; };
 		69902AD820E9AAC300BC759D /* NumberFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberFieldCell.h; sourceTree = "<group>"; };
@@ -181,6 +188,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6952189420F13ACE00761775 /* HowToPlay */ = {
+			isa = PBXGroup;
+			children = (
+				6952189520F13ADD00761775 /* HowToPlayVC.h */,
+				6952189620F13AE500761775 /* HowToPlayVC.m */,
+			);
+			path = HowToPlay;
+			sourceTree = "<group>";
+		};
+		6952189820F5A5CA00761775 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				6952189920F5A61900761775 /* minusSign.png */,
+				6952189A20F5A61900761775 /* plusSign.png */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		69AC6F431DFB5F800066F6A2 = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +231,7 @@
 		69AC6F4E1DFB5F800066F6A2 /* Enumerator */ = {
 			isa = PBXGroup;
 			children = (
+				6952189820F5A5CA00761775 /* Media */,
 				69AC6F521DFB5F800066F6A2 /* AppDelegate.h */,
 				69AC6F531DFB5F800066F6A2 /* AppDelegate.m */,
 				6942C4A91E1C259400C8DF1A /* Main.storyboard */,
@@ -220,6 +246,7 @@
 				6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */,
 				6942C4B21E1EF55700C8DF1A /* DB */,
 				69AC6F961DFC7F610066F6A2 /* Settings */,
+				6952189420F13ACE00761775 /* HowToPlay */,
 				69AC6F5B1DFB5F800066F6A2 /* Assets.xcassets */,
 				69AC6F5D1DFB5F800066F6A2 /* LaunchScreen.storyboard */,
 				69AC6F601DFB5F800066F6A2 /* Info.plist */,
@@ -400,6 +427,8 @@
 				690C6DBB1E04FDF400F93A8C /* SubFactorsView.xib in Resources */,
 				69FE7EB81E065CF600561BAC /* TextFieldCell.xib in Resources */,
 				69AC6F5F1DFB5F800066F6A2 /* LaunchScreen.storyboard in Resources */,
+				6952189B20F5A61900761775 /* minusSign.png in Resources */,
+				6952189C20F5A61900761775 /* plusSign.png in Resources */,
 				6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */,
 				69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */,
 				69AC6F5C1DFB5F800066F6A2 /* Assets.xcassets in Resources */,
@@ -500,6 +529,7 @@
 				69902ADA20E9AADA00BC759D /* NumberFieldCell.m in Sources */,
 				6902AB0E1E0B48D20048DEC6 /* HighScoreDataHandler.m in Sources */,
 				69AC6F511DFB5F800066F6A2 /* main.m in Sources */,
+				6952189720F13AE500761775 /* HowToPlayVC.m in Sources */,
 				69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

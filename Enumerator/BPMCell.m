@@ -30,6 +30,7 @@
     self.bpmCountLabel.font = [UIFont systemFontOfSize:20];
     
     self.bpmCountLabel.textAlignment = NSTextAlignmentCenter;
+    
     return self;
 }
 
@@ -52,5 +53,17 @@
 -(IBAction)editingDidEnd:(id)sender
 {
     NSLog(@"set value %f",_slider.value);
+}
+
+-(IBAction)didPressPlusButton:(id)sender
+{
+    self.slider.value = self.slider.value + 1;
+    [self sliderChangedValue:self];
+}
+
+-(IBAction)didPressMinusButton:(id)sender
+{
+    self.slider.value = self.slider.value - 1;
+    [self sliderChangedValue:self];
 }
 @end
