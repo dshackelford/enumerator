@@ -17,7 +17,7 @@
     
     screenSize = [UIScreen mainScreen].bounds.size;
     
-    tableNames= @[@"Username",@"Beats Per Minute",@"Factors",@"Count Iteration",@"Lives",@"Factor Switch"];
+    tableNames= @[@"Username",@"Beats Per Minute",@"Factors",@"Count Iteration",@"Lives"];
     
     self.title = @"SETTINGS";
     self.tableView.backgroundColor = [UIColor colorWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1];
@@ -46,7 +46,7 @@
 #pragma mark - UITableViewProtocols
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -62,7 +62,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50; // you can have your own choice, of course
+    return 0; // you can have your own choice, of course
+    //50
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

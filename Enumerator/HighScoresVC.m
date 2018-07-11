@@ -25,7 +25,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    tableData = @[@"Personal High Scores",@"Global High Scores"];
+    tableData = @[@"Personal High Scores"];
+    //,@"Global High Scores"
 }
 
 

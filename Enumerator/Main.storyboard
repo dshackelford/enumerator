@@ -96,7 +96,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="dTr-ws-xIf" kind="presentation" id="R8D-G2-k0K"/>
+                                    <segue destination="dTr-ws-xIf" kind="presentation" id="up6-UE-hwO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIb-iO-Obq">
@@ -287,7 +287,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z24-oa-Rsj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="1695"/>
+            <point key="canvasLocation" x="1076" y="1733"/>
         </scene>
         <!--User High ScoresVC-->
         <scene sceneID="3Re-Fu-ivx">
@@ -412,6 +412,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Z64-Oe-PZZ"/>
         <segue reference="bq4-mO-gJ5"/>
-        <segue reference="BGv-bT-NAw"/>
+        <segue reference="Sg5-kA-AWa"/>
     </inferredMetricsTieBreakers>
 </document>
