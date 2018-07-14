@@ -21,17 +21,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PAU-Zd-5xo">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Metronome.png" translatesAutoresizingMaskIntoConstraints="NO" id="PAU-Zd-5xo">
+                                <rect key="frame" x="62" y="208.5" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="4IV-Hi-yeh"/>
+                                    <constraint firstAttribute="width" constant="250" id="L9c-oi-amy"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enumerator!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRk-2l-LPK">
+                                <rect key="frame" x="75" y="478.5" width="225" height="47"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="PAU-Zd-5xo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="TSu-tt-GLn"/>
+                            <constraint firstItem="oRk-2l-LPK" firstAttribute="top" secondItem="PAU-Zd-5xo" secondAttribute="bottom" constant="20" id="dEa-pd-wTA"/>
+                            <constraint firstItem="PAU-Zd-5xo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eAc-D6-t4a"/>
+                            <constraint firstItem="oRk-2l-LPK" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gsT-2C-sJW"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Metronome.png" width="1024" height="1024"/>
+    </resources>
 </document>
