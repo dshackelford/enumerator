@@ -24,7 +24,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     tableData = [[NSMutableArray alloc] init];
-    HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] init];
+    HighScoreDataHandler* hsHandler = [[HighScoreDataHandler alloc] initWithVC:self];
     [hsHandler getAllScores];
 //    [hsHandler getTopScores];
         

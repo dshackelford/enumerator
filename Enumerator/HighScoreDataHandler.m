@@ -11,6 +11,15 @@
 
 @implementation HighScoreDataHandler
 
+-(id)initWithVC:(UIViewController *)vcInit
+{
+    self = [super init];
+    
+    self.vc = vcInit;
+    
+    return self;
+}
+
 -(void)getScoresForFactors:(NSString*)factorStr
 {
     [self startSessionWithURL:[NSString stringWithFormat:@"http://dshacktech.com/enumerator/getScoresFromFactors.php?factors=%@",factorStr]];
@@ -134,35 +143,18 @@
         if(error)
         {
             
-//            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Web Error" message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//                [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:nil];
-//            }]];
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Web Error" message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:nil];
+            }]];
+            [self.vc presentViewController:alert animated:YES completion:nil];
             
-            UIAlertView *anError;
-            anError = [[UIAlertView alloc]
-                       initWithTitle:@"Web Error"
-                       message: [error localizedDescription]
-                       delegate: self
-                       cancelButtonTitle:@"OK"
-                       otherButtonTitles:nil ] ;
-            anError.tag = 200;
-            [anError show];
-            return;
-        }else{
+        }else
+        {
             //  the data was received in URLSession:dataTask:didReceiveData:
             //  the task has now ended, handle the response based on the received data
         }
     });
-}
-
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView.tag == 200)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:nDidGetUserScores object:nil];
-    }
-    
 }
 
 @end

@@ -264,7 +264,7 @@
         //if the user has inputed a valid username then post it to the global highscores
         if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])
         {
-            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] initWithVC:self];
             [hsDataHandler postAHighScore:count];
         }
     }
@@ -276,7 +276,7 @@
         //if the user has inputed a valid username then post it to the global highscores
         if(![[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:kUserName]] isEqualToString:@"username"])
         {
-            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] init];
+            HighScoreDataHandler* hsDataHandler = [[HighScoreDataHandler alloc] initWithVC:self];
             [hsDataHandler postAHighScore:count];
         }
     }

@@ -26,6 +26,4 @@
 
 @property int selectedRow;
 
--(void)grabHighScores;
-
 @end
