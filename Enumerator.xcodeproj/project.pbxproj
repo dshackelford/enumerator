@@ -15,7 +15,6 @@
 		6942C4A51E1C171800C8DF1A /* GlobalHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */; };
 		6942C4A71E1C172300C8DF1A /* UserHighScoresVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */; };
 		6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6942C4A91E1C259400C8DF1A /* Main.storyboard */; };
-		6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */; };
 		6942C4B51E1F018A00C8DF1A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */; };
 		6952189320E9BA6500761775 /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6952189220E9BA6500761775 /* DBHandler.m */; };
 		6952189720F13AE500761775 /* HowToPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6952189620F13AE500761775 /* HowToPlayVC.m */; };
@@ -35,6 +34,8 @@
 		69AC6F891DFB6C5E0066F6A2 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F881DFB6C5E0066F6A2 /* SettingsVC.m */; };
 		69AC6F911DFB86A50066F6A2 /* AppUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F901DFB86A50066F6A2 /* AppUtilities.m */; };
 		69AC6F9A1DFC81300066F6A2 /* BPMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AC6F991DFC81300066F6A2 /* BPMCell.m */; };
+		69D238E420FA94AA00984EDD /* Metronome.pxm in Resources */ = {isa = PBXBuildFile; fileRef = 69D238E220FA94A900984EDD /* Metronome.pxm */; };
+		69D238E520FA94AA00984EDD /* Metronome.png in Resources */ = {isa = PBXBuildFile; fileRef = 69D238E320FA94AA00984EDD /* Metronome.png */; };
 		69FE7EB61E065CED00561BAC /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE7EB51E065CED00561BAC /* TextFieldCell.m */; };
 		69FE7EB81E065CF600561BAC /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE7EB71E065CF600561BAC /* TextFieldCell.xib */; };
 		8D7BCD1D5FBBA952B29B6905 /* libPods-Enumerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4952999FAF4E9CA0545A9BAB /* libPods-Enumerator.a */; };
@@ -76,8 +77,6 @@
 		6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHighScoresVC.m; sourceTree = "<group>"; };
 		6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserHighScoresVC.h; sourceTree = "<group>"; };
 		6942C4A91E1C259400C8DF1A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		6942C4AE1E1EF55000C8DF1A /* DBTableColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTableColumn.h; sourceTree = "<group>"; };
-		6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTableColumn.m; sourceTree = "<group>"; };
 		6942C4B41E1F018A00C8DF1A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		6952189120E9BA5100761775 /* DBHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
 		6952189220E9BA6500761775 /* DBHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
@@ -113,6 +112,8 @@
 		69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppUtilities.h; sourceTree = "<group>"; };
 		69AC6F991DFC81300066F6A2 /* BPMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMCell.m; sourceTree = "<group>"; };
 		69AC6F9B1DFC81370066F6A2 /* BPMCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMCell.h; sourceTree = "<group>"; };
+		69D238E220FA94A900984EDD /* Metronome.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Metronome.pxm; sourceTree = "<group>"; };
+		69D238E320FA94AA00984EDD /* Metronome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Metronome.png; sourceTree = "<group>"; };
 		69FE7EB41E065CE400561BAC /* TextFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		69FE7EB51E065CED00561BAC /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		69FE7EB71E065CF600561BAC /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
@@ -151,32 +152,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6902AB0B1E08ED080048DEC6 /* Game View */ = {
-			isa = PBXGroup;
-			children = (
-				69AC6F551DFB5F800066F6A2 /* GameVC.h */,
-				69AC6F561DFB5F800066F6A2 /* GameVC.m */,
-				690AD7FE1E087B0F000221AE /* GameViewPopulator.h */,
-				690AD7FF1E087B19000221AE /* GameViewPopulator.m */,
-			);
-			name = "Game View";
-			sourceTree = "<group>";
-		};
-		6942C4B21E1EF55700C8DF1A /* DB */ = {
-			isa = PBXGroup;
-			children = (
-				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
-				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
-				6952189120E9BA5100761775 /* DBHandler.h */,
-				6952189220E9BA6500761775 /* DBHandler.m */,
-				6942C4AE1E1EF55000C8DF1A /* DBTableColumn.h */,
-				6942C4AF1E1EF55000C8DF1A /* DBTableColumn.m */,
-				6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */,
-				6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */,
-			);
-			name = DB;
-			sourceTree = "<group>";
-		};
 		6942C4B31E1F018A00C8DF1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,18 +163,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6952189420F13ACE00761775 /* HowToPlay */ = {
-			isa = PBXGroup;
-			children = (
-				6952189520F13ADD00761775 /* HowToPlayVC.h */,
-				6952189620F13AE500761775 /* HowToPlayVC.m */,
-			);
-			path = HowToPlay;
-			sourceTree = "<group>";
-		};
 		6952189820F5A5CA00761775 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				69D238E120FA949D00984EDD /* Icons */,
 				6952189920F5A61900761775 /* minusSign.png */,
 				6952189A20F5A61900761775 /* plusSign.png */,
 			);
@@ -231,22 +198,12 @@
 		69AC6F4E1DFB5F800066F6A2 /* Enumerator */ = {
 			isa = PBXGroup;
 			children = (
+				69D238EA20FA950000984EDD /* Utilities */,
+				69D238E620FA94C300984EDD /* ViewControllers */,
 				6952189820F5A5CA00761775 /* Media */,
 				69AC6F521DFB5F800066F6A2 /* AppDelegate.h */,
 				69AC6F531DFB5F800066F6A2 /* AppDelegate.m */,
 				6942C4A91E1C259400C8DF1A /* Main.storyboard */,
-				6902AB0B1E08ED080048DEC6 /* Game View */,
-				69AC6F861DFB697C0066F6A2 /* HomeVC.h */,
-				69AC6F841DFB69710066F6A2 /* HomeVC.m */,
-				698666541E00CAA900141882 /* HighScoresVC.h */,
-				698666521E00CA9B00141882 /* HighScoresVC.m */,
-				6942C4A31E1C170B00C8DF1A /* GlobalHighScoresVC.h */,
-				6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */,
-				6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */,
-				6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */,
-				6942C4B21E1EF55700C8DF1A /* DB */,
-				69AC6F961DFC7F610066F6A2 /* Settings */,
-				6952189420F13ACE00761775 /* HowToPlay */,
 				69AC6F5B1DFB5F800066F6A2 /* Assets.xcassets */,
 				69AC6F5D1DFB5F800066F6A2 /* LaunchScreen.storyboard */,
 				69AC6F601DFB5F800066F6A2 /* Info.plist */,
@@ -281,7 +238,74 @@
 			path = EnumeratorUITests;
 			sourceTree = "<group>";
 		};
-		69AC6F961DFC7F610066F6A2 /* Settings */ = {
+		69D238E120FA949D00984EDD /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				69D238E320FA94AA00984EDD /* Metronome.png */,
+				69D238E220FA94A900984EDD /* Metronome.pxm */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		69D238E620FA94C300984EDD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				69D238EC20FA955200984EDD /* HowToPlayVC */,
+				69D238EB20FA954100984EDD /* SettingsVC */,
+				69D238E920FA94EE00984EDD /* HighScoresVC */,
+				69D238E820FA94DC00984EDD /* HomeVC */,
+				69D238E720FA94CE00984EDD /* GameVC */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		69D238E720FA94CE00984EDD /* GameVC */ = {
+			isa = PBXGroup;
+			children = (
+				69AC6F551DFB5F800066F6A2 /* GameVC.h */,
+				69AC6F561DFB5F800066F6A2 /* GameVC.m */,
+				690AD7FE1E087B0F000221AE /* GameViewPopulator.h */,
+				690AD7FF1E087B19000221AE /* GameViewPopulator.m */,
+			);
+			path = GameVC;
+			sourceTree = "<group>";
+		};
+		69D238E820FA94DC00984EDD /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				69AC6F861DFB697C0066F6A2 /* HomeVC.h */,
+				69AC6F841DFB69710066F6A2 /* HomeVC.m */,
+			);
+			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		69D238E920FA94EE00984EDD /* HighScoresVC */ = {
+			isa = PBXGroup;
+			children = (
+				698666541E00CAA900141882 /* HighScoresVC.h */,
+				698666521E00CA9B00141882 /* HighScoresVC.m */,
+				6942C4A31E1C170B00C8DF1A /* GlobalHighScoresVC.h */,
+				6942C4A41E1C171800C8DF1A /* GlobalHighScoresVC.m */,
+				6942C4A81E1C172E00C8DF1A /* UserHighScoresVC.h */,
+				6942C4A61E1C172300C8DF1A /* UserHighScoresVC.m */,
+			);
+			path = HighScoresVC;
+			sourceTree = "<group>";
+		};
+		69D238EA20FA950000984EDD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				69AC6F921DFB86AE0066F6A2 /* AppUtilities.h */,
+				69AC6F901DFB86A50066F6A2 /* AppUtilities.m */,
+				6952189120E9BA5100761775 /* DBHandler.h */,
+				6952189220E9BA6500761775 /* DBHandler.m */,
+				6902AB0F1E0B48DB0048DEC6 /* HighScoreDataHandler.h */,
+				6902AB0D1E0B48D20048DEC6 /* HighScoreDataHandler.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		69D238EB20FA954100984EDD /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
 				69AC6F871DFB6C550066F6A2 /* SettingsVC.h */,
@@ -298,7 +322,16 @@
 				69AC6F991DFC81300066F6A2 /* BPMCell.m */,
 				69A45DCD1DFC858100273FFD /* BPMCell.xib */,
 			);
-			name = Settings;
+			path = SettingsVC;
+			sourceTree = "<group>";
+		};
+		69D238EC20FA955200984EDD /* HowToPlayVC */ = {
+			isa = PBXGroup;
+			children = (
+				6952189520F13ADD00761775 /* HowToPlayVC.h */,
+				6952189620F13AE500761775 /* HowToPlayVC.m */,
+			);
+			path = HowToPlayVC;
 			sourceTree = "<group>";
 		};
 		C3FB5A1721E0E7E71BCC25BB /* Pods */ = {
@@ -430,6 +463,8 @@
 				6952189B20F5A61900761775 /* minusSign.png in Resources */,
 				6952189C20F5A61900761775 /* plusSign.png in Resources */,
 				6942C4AA1E1C259400C8DF1A /* Main.storyboard in Resources */,
+				69D238E520FA94AA00984EDD /* Metronome.png in Resources */,
+				69D238E420FA94AA00984EDD /* Metronome.pxm in Resources */,
 				69A45DCE1DFC858100273FFD /* BPMCell.xib in Resources */,
 				69AC6F5C1DFB5F800066F6A2 /* Assets.xcassets in Resources */,
 			);
@@ -520,7 +555,6 @@
 				69FE7EB61E065CED00561BAC /* TextFieldCell.m in Sources */,
 				690AD8001E087B19000221AE /* GameViewPopulator.m in Sources */,
 				690C6DBD1E04FE0500F93A8C /* SubFactorsView.m in Sources */,
-				6942C4B11E1EF55000C8DF1A /* DBTableColumn.m in Sources */,
 				69AC6F891DFB6C5E0066F6A2 /* SettingsVC.m in Sources */,
 				69AC6F851DFB69710066F6A2 /* HomeVC.m in Sources */,
 				698666531E00CA9B00141882 /* HighScoresVC.m in Sources */,
